@@ -29,7 +29,7 @@ College students often know what assignments they have due, but not how heavy th
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](images/app_sketch.png)
 
 The application uses a calendar-based layout with three primary views: daily, weekly, and monthly. The weekly view is the main planning interface, displaying assignment density and total workload per day. The monthly view provides a high-level overview to identify heavy weeks in advance, while the daily view focuses on detailed task planning.
 
