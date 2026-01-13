@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-LoadMap is a web application designed to help students visualize and manage their academic workload. Instead of relying on simple to-do lists, LoadMap shows how heavy or light a student’s schedule is across daily, weekly, and monthly views by weighting assignments based on due dates and importance. This allows students to plan ahead, avoid burnout, and make informed decisions about their time.
+LoadMap is a web application designed to help students visualize and manage their academic workload. Instead of relying on simple to-do lists or excel spreadsheets, LoadMap shows how heavy or light a student’s schedule is across daily, weekly, and monthly views by weighting assignments based on due dates, importance, and estimated worklaod. Students will be able to plan out not just academic deadlines, but personal and work goals and deadlines as well. Calendar view will also allow students to be able to properly organize themselves. This allows students to plan ahead, avoid burnout, and make informed decisions about their time.
 
 > [!NOTE]
 > This README.md file documents the progress of the application across multiple deliverables. Each section corresponds to a specific Canvas submission and includes a checklist of rubric items along with descriptions of completed work.
@@ -31,7 +31,7 @@ College students often know what assignments they have due, but not how heavy th
 
 ![Design image](images/app_sketch.png)
 
-The application uses a calendar-based layout with three primary views: daily, weekly, and monthly. The weekly view is the main planning interface, displaying assignment density and total workload per day. The monthly view provides a high-level overview to identify heavy weeks in advance, while the daily view focuses on detailed task planning.
+The application uses a calendar-based layout with three primary views: daily, weekly, and monthly. The weekly view is the main planning interface, displaying assignment density and total workload per day. The monthly view provides a high-level overview to identify heavy weeks in advance, while the daily view focuses on detailed task planning. Students will be able to swap between School, Work, and Personal planning and see their individual folders as well.
 
 Assignments are visually represented using color intensity and bars to indicate workload weight. Users can add, edit, or delete assignments, and the visual workload updates immediately to reflect changes.
 
@@ -44,6 +44,8 @@ Assignments are visually represented using color intensity and bars to indicate 
 - Assignment creation, editing, and deletion
 - Forecasting of heavy workload days and weeks
 - User accounts with saved personal data
+- Personal, Work, and Academic planning
+- Calendar view to see overview of assignments
 
 ---
 
