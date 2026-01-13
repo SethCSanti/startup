@@ -1,6 +1,6 @@
 # CS 260 Notes
 
-[My startup - (Name of startup)]( [ Link for startup ] )
+[LoadMap](README.md)
 
 ## Helpful links
 
