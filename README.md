@@ -51,23 +51,18 @@ Assignments are visually represented using color intensity and bars to indicate 
 
 ### Technologies
 
-I am going to use the required technologies in the following ways.
+I am going to use the required technologies in the following ways:
 
 - **HTML**  
   Used to structure the application layout, including navigation, calendar views, forms, and modals.
-
 - **CSS**  
   Used for responsive design, visual hierarchy, and color-coded workload indicators.
-
 - **React**  
   Used to create reusable components such as calendar views, assignment cards, and input forms. React state and hooks will manage assignment data and view switching.
-
 - **Service**  
   A Node.js and Express backend will handle API requests for creating, updating, and retrieving assignments and workload data.
-
 - **DB/Login**  
   MongoDB will store user credentials and assignment data. Authentication will ensure each user only accesses their own data.
-
 - **WebSocket**  
   WebSockets will provide real-time updates so that assignment changes instantly update workload visualizations.
 
@@ -75,7 +70,7 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://loadmap.click).
 
 ## 🚀 HTML deliverable
 

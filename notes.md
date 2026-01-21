@@ -10,7 +10,7 @@
 
 ## AWS
 
-My IP address is: __.__.__.___
+My IP address is: 54.211.156.166
 (Notes)
 
 ## Caddy
