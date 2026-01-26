@@ -76,7 +76,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I completed this part of the deliverable.
 - [x] **Proper HTML element usage** - I completed this part of the deliverable.
 - [x] **Links** - I completed this part of the deliverable.
 - [x] **Text** - I completed this part of the deliverable.
