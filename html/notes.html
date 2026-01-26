@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoadMap – Notes</title>
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+<body>
+  <main>
+    <h1>LoadMap – Notes</h1>
+    <nav aria-label="Primary navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="calendar.html" class="nav-link">Calendar</a>
+      <a href="tasks.html" class="nav-link">Tasks</a>
+      <a href="notes.html" class="nav-link active">Notes</a>
+    </nav>
+
+    <h2>Task‑Linked Notes</h2>
+    <p>
+      Notes in LoadMap will work like Google Keep and can be linked to specific tasks for extra context.
+    </p>
+
+    <section aria-label="Create note" class="note-form">
+      <label for="note-task">Related task (placeholder)</label>
+      <select id="note-task">
+        <option>CS 313 Project</option>
+        <option>Math Homework</option>
+        <option>Send Email</option>
+      </select>
+
+      <label for="note-text">Note text</label>
+      <textarea id="note-text" rows="6" cols="60" placeholder="Write your note here..."></textarea>
+
+      <button type="button">Save Note (mock)</button>
+    </section>
+
+    <section aria-label="Existing notes">
+      <h3>Sample Notes (placeholder)</h3>
+
+      <article class="note-card">
+        <h4>CS 313 Project</h4>
+        <p>Remember to break the project into smaller subtasks.</p>
+      </article>
+
+      <article class="note-card">
+        <h4>Math Homework</h4>
+        <p>Review lecture notes before starting problems 5–10.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
