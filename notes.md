@@ -2,6 +2,9 @@
 
 [LoadMap](README.md)
 
+# Code for Deployment:
+./deployFiles.sh -k ~/260_key_pair.pem -h loadmap.click -s startup
+
 # Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
