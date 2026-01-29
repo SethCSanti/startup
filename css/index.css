@@ -186,3 +186,44 @@ nav {
   transform: scale(1.02);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
+
+
+
+
+/* ------------------ FOOTER ------------------ */
+.footer {
+  background-color: var(--primary);
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer .social-icon {
+  width: 24px;
+  height: 24px;
+  background-color: white; /* placeholder circle */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem; /* for text inside circle */
+  color: var(--primary);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.footer .social-icon:hover {
+  transform: scale(1.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 768px) {
+  .footer .social-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+}
