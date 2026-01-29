@@ -16,7 +16,7 @@ main {
   padding: 1rem;
 }
 
-
+/* ------------------ NAVBAR ------------------ */
 nav {
   background: #003366;
   padding: 0.5rem;
@@ -45,12 +45,23 @@ nav {
 }
 
 
+
+/* ------------------ TASK TILES ------------------ */
 .task-tile {
   display: inline-block;
   border: 1px solid #ccc;
   margin: 0.5rem;
   padding: 0.5rem;
   background: #f5f5f5;
+
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  transition: transform 0.2s, box-shadow 0.2s; /* smooth hover */
+}
+
+.task-tile:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .task-tile.heavy { width: 200px; height: 200px; }
@@ -58,13 +69,21 @@ nav {
 .task-tile.light { width: 100px; height: 100px; }
 
 
+
+/* ------------------ PLACEHOLDERS ------------------ */
 .placeholder {
   border: 1px solid #ccc;
   padding: 1rem;
   margin-top: 1rem;
   background: #f9f9f9;
+
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* subtle shadow */
 }
 
+
+
+/* ------------------ CALENDAR ------------------ */
 .calendar-legend {
   margin-top: 1rem;
 }
@@ -100,6 +119,19 @@ nav {
 .day.high { background: #ffcdd2; }
 
 
+
+/* ------------------ NOTE CARDS ------------------ */
+.note-card {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  background: #fffde7;
+
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  transition: transform 0.2s, box-shadow 0.2s; /* smooth hover */
+}
+
 .note-form {
   margin: 1rem 0;
   display: flex;
@@ -107,9 +139,7 @@ nav {
   gap: 0.5rem;
 }
 
-.note-card {
-  border: 1px solid #ddd;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  background: #fffde7;
+.note-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
