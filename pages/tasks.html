@@ -27,10 +27,24 @@
 </nav>
     
   <main>
-    <h2>Tasks</h2>
+    <h2 class="h2 h-md-2">Tasks</h2>
     <p>Tasks will appear as interactive squares. Heavier tasks will be larger and shrink slightly each time you click them until they are complete.</p>
 
-    <section aria-label="Task board">
+<section id="task-filter-placeholder" class="placeholder">
+  <h3>Task Filter (placeholder)</h3>
+  <p>Future version will allow filtering tasks by category: School, Work, Personal.</p>
+  
+  <div class="d-flex gap-2 flex-wrap">
+    <button type="button" class="btn btn-primary btn-sm">All</button>
+    <button type="button" class="btn btn-outline-primary btn-sm">School</button>
+    <button type="button" class="btn btn-outline-primary btn-sm">Work</button>
+    <button type="button" class="btn btn-outline-primary btn-sm">Personal</button>
+  </div>
+</section>
+
+<section aria-label="Task board" class="task-board-container">
+  <div class="task-board d-flex flex-wrap gap-3">
+    <section aria-label="Task board" class="task-board d-flex flex-wrap gap-3">
       <div class="task-tile heavy">
         <h3>CS 313 Project</h3>
         <p>Weight: 5</p>
@@ -48,7 +62,95 @@
         <p>Weight: 1</p>
         <button type="button">Work on task (mock)</button>
       </div>
-    </section>
+
+      <div class="task-tile heavy">
+        <h3>Final Essay</h3>
+        <p>Weight: 5</p>
+        <button type="button">Work on task (mock)</button>
+      </div>
+
+      <div class="task-tile medium">
+        <h3>Lab Report</h3>
+        <p>Weight: 3</p>
+        <button type="button">Work on task (mock)</button>
+      </div>
+
+      <div class="task-tile light">
+        <h3>Check Emails</h3>
+        <p>Weight: 1</p>
+        <button type="button">Work on task (mock)</button>
+      </div>
+
+      <div class="task-tile heavy">
+        <h3>Group Project</h3>
+        <p>Weight: 5</p>
+        <button type="button">Work on task (mock)</button>
+      </div>
+
+      <div class="task-tile medium">
+        <h3>Quiz Preparation</h3>
+        <p>Weight: 3</p>
+        <button type="button">Work on task (mock)</button>
+      </div>
+
+      <div class="task-tile light">
+        <h3>Read Notes</h3>
+        <p>Weight: 1</p>
+        <button type="button">Work on task (mock)</button>
+      </div>
+
+      <div class="task-tile heavy">
+          <h3>Research Paper</h3>
+          <p>Weight: 5</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+        <div class="task-tile medium">
+          <h3>Project Proposal</h3>
+          <p>Weight: 3</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+        <div class="task-tile light">
+          <h3>Update To-Do List</h3>
+          <p>Weight: 1</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+        <div class="task-tile medium">
+          <h3>Practice Presentation</h3>
+          <p>Weight: 3</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+        <div class="task-tile heavy">
+          <h3>Final Exam Review</h3>
+          <p>Weight: 5</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+        <div class="task-tile light">
+          <h3>Organize Notes</h3>
+          <p>Weight: 1</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+        <div class="task-tile medium">
+          <h3>Code Assignment</h3>
+          <p>Weight: 3</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+        <div class="task-tile heavy">
+          <h3>Capstone Project</h3>
+          <p>Weight: 5</p>
+          <button type="button">Work on task (mock)</button>
+        </div>
+
+
+</div>
+</section>
+
 
     <p>In a later deliverable, JavaScript will resize these tiles after each click to show progress toward completion.</p>
   </main>

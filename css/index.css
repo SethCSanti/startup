@@ -16,6 +16,17 @@ main {
   padding: 1rem;
 }
 
+main h2 {
+  font-size: 1.5rem;  /* mobile default */
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  main h2 {
+    font-size: 2rem;  /* desktop/tablet */
+  }
+}
+
 /* ------------------ NAVBAR ------------------ */
 nav {
   background: #003366;
@@ -47,26 +58,58 @@ nav {
 
 
 /* ------------------ TASK TILES ------------------ */
-.task-tile {
-  display: inline-block;
-  border: 1px solid #ccc;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  background: #f5f5f5;
+/* Task tile colors based on weight */
+.task-tile.light {
+  width: 100px;
+  height: 100px;
+  background-color: #c8e6c9; /* green = light task */
+}
 
-  border-radius: 12px; /* rounded corners */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
-  transition: transform 0.2s, box-shadow 0.2s; /* smooth hover */
+.task-tile.medium {
+  width: 150px;
+  height: 150px;
+  background-color: #fff9c4; /* yellow = medium task */
+}
+
+.task-tile.heavy {
+  width: 200px;
+  height: 200px;
+  background-color: #ffcdd2; /* red = heavy task */
+}
+
+.task-tile {
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .task-tile:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.task-tile.heavy { width: 200px; height: 200px; }
-.task-tile.medium { width: 150px; height: 150px; }
-.task-tile.light { width: 100px; height: 100px; }
+.task-tile.light:hover { background-color: #a5d6a7; }
+.task-tile.medium:hover { background-color: #fff59d; }
+.task-tile.heavy:hover { background-color: #ef9a9a; }
+
+.task-board-container {
+  border: 2px solid var(--primary);
+  border-radius: 16px; /* rounded corners */
+  padding: 1rem; /* inner spacing so tiles don’t touch the edge */
+  margin: 1rem 0; /* spacing from other sections */
+  background-color: var(--background); /* optional: makes tiles pop */
+  overflow: auto; /* ensures it wraps on smaller screens */
+}
+
+.task-board-container {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.task-board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
 
 
