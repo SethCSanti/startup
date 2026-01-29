@@ -1,8 +1,16 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+:root {
+  --primary: #01311F;
+  --accent: #C6AA58;
+  --background: #F3F2ED;
 }
+
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--background);
+}
+
 
 main {
   padding: 1rem;
@@ -14,10 +22,21 @@ nav {
   padding: 0.5rem;
 }
 
+
+.custom-navbar {
+  background-color: var(--primary);
+}
+
+
 .nav-link {
   color: white;
   text-decoration: none;
   margin-right: 1rem;
+}
+
+
+.nav-link:hover {
+  color: var(--accent);
 }
 
 .nav-link.active {
