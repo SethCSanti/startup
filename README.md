@@ -76,26 +76,26 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - I completed this part of the deliverable.
-- [x] **Proper HTML element usage** - I completed this part of the deliverable.
-- [x] **Links** - I completed this part of the deliverable.
-- [x] **Text** - I completed this part of the deliverable.
-- [x] **3rd party API placeholder** - I completed this part of the deliverable.
-- [x] **Images** - I completed this part of the deliverable.
-- [x] **Login placeholder** - I completed this part of the deliverable.
-- [x] **DB data placeholder** - I completed this part of the deliverable.
-- [x] **WebSocket placeholder** - I completed this part of the deliverable.
+- [x] **HTML pages** - I made 5 different pages: Home, Tasks, Calendar, Notes, and About
+- [x] **Proper HTML element usage** - I spent a lot of time working on the navigation elements and placeholder elements.
+- [x] **Links** - I put a link to my GitHub repo and links between pages.
+- [x] **Text** - Most of the pages have some sort of text.
+- [x] **3rd party API placeholder** - I put this placeholder on the calendar page to use Google Calendar.
+- [x] **Images** - I made a gallery on the home page to put images.
+- [x] **Login placeholder** - I put a login placeholder at the top of the home page.
+- [x] **DB data placeholder** - I put this in a dashboard at the top of the home page.
+- [x] **WebSocket placeholder** - I put this in a dashboard at the top of the home page.
 
 ## 🚀 CSS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Header, footer, and main content body** - I completed this part of the deliverable.
-- [x] **Navigation elements** - I completed this part of the deliverable.
-- [x] **Responsive to window resizing** - I completed this part of the deliverable.
-- [x] **Application elements** - I completed this part of the deliverable.
-- [x] **Application text content** - I completed this part of the deliverable.
-- [x] **Application images** - I completed this part of the deliverable.
+- [x] **Header, footer, and main content body** - I made a header, footer, and overall style guide with specific colors.
+- [x] **Navigation elements** - I made the navigation links apart of the styled header. (Bootstrap)
+- [x] **Responsive to window resizing** - I made sure the pages resize with the window. (Mainly with Bootstrap and the flex elements.)
+- [x] **Application elements** - I did a lot of overall styling of the various elements, especially the placeholders, to match the branding and colors that I want.
+- [x] **Application text content** - I mainly styled the organization of it and allignment.
+- [x] **Application images** - I styled the gallery on the home page.
 
 ## 🚀 React part 1: Routing deliverable
 
