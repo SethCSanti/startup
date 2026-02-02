@@ -28,96 +28,47 @@
 </nav>
 
   <main class="container my-4">
-  <div class="row g-4">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5>User Tasks Overview</h5>
-          <p>Placeholder for task data (DB)</p>
-        </div>
-      </div>
-    </div>
+  <div class="card">
+  <div class="card-body">
+    <h5>Live Tasks Overview</h5>
+    <p>Data loaded from database (placeholder)</p>
+    <p>Status: <strong>Realtime updates enabled (mock)</strong></p>
+  </div>
+</div>
 
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5>User Notes Overview</h5>
-          <p>Placeholder for notes data (DB)</p>
-        </div>
-      </div>
-    </div>
+    <div class="card">
+  <div class="card-body">
+    <h5>Live Notes Overview</h5>
+    <p>Stored in database (placeholder)</p>
+    <p>Synced across devices (placeholder WebSocket)</p>
+  </div>
+</div>
+
+
+    <!-- GitHub repo -->
+    <section class="top-banner">
+  <div class="banner-item">
+    <h4>Repository</h4>
+    <a href="https://github.com/SethCSanti/startup.git" target="_blank">
+      View on GitHub
+    </a>
   </div>
 
-  <section id="github-repo" class="placeholder">
-      <h3>Project Repository</h3>
-      <p>
-        View the LoadMap source code on GitHub:
-        <p></p>
-        <a href="https://github.com/SethCSanti/startup.git" target="_blank">
-          LoadMap GitHub repository
-        </a>
-      </p>
-    </section>
+    <div class="banner-item banner-login">
+      <h4>Login</h4>
+      <p>Logged in as: <strong>Guest (mock)</strong></p>
+      <button type="button">Log In</button>
+    </div>
+  </section>
 
-    <!-- 3rd party API placeholder -->
-    <section id="third-party-api" class="placeholder">
-      <h3>3rd Party API (placeholder)</h3>
-      <p>
-        This section will call an external API (for example, Google Calendar or another scheduling service)
-        and display synced events here.
-      </p>
-    </section>
 
-    <!-- Images placeholder -->
-    <section id="app-images" class="placeholder">
-      <h3>Application Images</h3>
-      <p>Final screenshots and visual workload examples will be shown here.</p>
-      <img src="../images/app_sketch.png" alt="Initial LoadMap design sketch" />
-    </section>
+    <!-- Image Gallery -->
+    <section class="image-gallery">
+  <h3>Application Gallery</h3>
 
-    <!-- Login placeholder -->
-    <section id="login-placeholder" class="placeholder">
-      <h3>Login (placeholder)</h3>
-      <p>Future version will authenticate users and show their name after login.</p>
-      <form>
-        <label>
-          Email:
-          <input type="email" placeholder="you@example.com" />
-        </label>
-        <label>
-          Password:
-          <input type="password" placeholder="Enter password" />
-        </label>
-        <button type="button">Log In (mock)</button>
-      </form>
-      <p>Logged in as: <span id="username">Guest (mock)</span></p>
-    </section>
-
-    <!-- DB data placeholder -->
-    <section id="db-data-placeholder" class="placeholder">
-      <h3>Database Data (placeholder)</h3>
-      <p>The list below represents assignments that will eventually be loaded from MongoDB.</p>
-      <ul>
-        <li>CS 313 Project – due 2026‑01‑30 – Weight: 4</li>
-        <li>Math Homework – due 2026‑01‑27 – Weight: 2</li>
-      </ul>
-    </section>
-
-    <!-- WebSocket placeholder -->
-    <section id="websocket-placeholder" class="placeholder">
-      <h3>WebSocket Realtime Updates (placeholder)</h3>
-      <p>
-        This area will show live updates (for example, task changes from other devices) pushed over a WebSocket
-        connection.
-      </p>
-      <p>Status: <span id="ws-status">Not connected (mock)</span></p>
-      <button type="button">Connect (mock)</button>
-    </section>
-  </main>
-  <footer class="footer">
-  <div class="social-icon" title="GitHub">GH</div>
-  <div class="social-icon" title="LinkedIn">LI</div>
-  <div class="social-icon" title="Instagram">IG</div>
-</footer>
-</body>
-</html>
+  <div class="gallery-grid">
+    <img src="../images/app_sketch.png" alt="App sketch">
+    <div class="gallery-placeholder">Screenshot 2</div>
+    <div class="gallery-placeholder">Screenshot 3</div>
+  </div>
+</section>
