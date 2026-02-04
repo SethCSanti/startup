@@ -899,7 +899,134 @@ They are **separate responsibilities** working together.
 
 # React Part 1: Routing
 
-(notes)
+## What React Is
+React is a JavaScript library for building user interfaces, especially single-page applications (SPAs). It focuses on creating reusable UI components and efficiently updating the DOM when data changes.
+
+## Core Concepts
+- **Component-Based Architecture**: UIs are built from small, reusable components.
+- **Declarative**: You describe *what* the UI should look like, and React handles *how* it updates.
+- **Unidirectional Data Flow**: Data flows from parent components down to child components via props.
+
+## JSX
+- JSX is a syntax extension that looks like HTML but compiles to JavaScript.
+- You can embed JavaScript expressions using `{}`.
+- JSX must return a single parent element.
+- Attributes use camelCase (e.g., `className`, `onClick`).
+
+## Components
+### Functional Components
+- The most common type of component.
+- Written as JavaScript functions.
+- Can use hooks for state and lifecycle features.
+
+### Class Components (Legacy)
+- Use ES6 classes.
+- Have lifecycle methods like `componentDidMount`.
+- Less common in modern React.
+
+## Props
+- Short for “properties.”
+- Used to pass data from parent to child components.
+- Read-only (cannot be modified by the child).
+- Enable component reusability.
+
+## State
+- Represents data that can change over time.
+- Managed inside a component.
+- When state changes, React re-renders the component.
+- State updates are asynchronous.
+
+## Hooks
+Hooks allow functional components to use React features.
+- **useState**: Adds local state to a component.
+- **useEffect**: Handles side effects (data fetching, subscriptions, timers).
+- **useContext**: Accesses context without prop drilling.
+- **useRef**: Stores mutable values that don’t cause re-renders.
+- **useMemo / useCallback**: Performance optimizations.
+
+## useEffect Basics
+- Runs after render.
+- Can depend on values using a dependency array.
+- Can return a cleanup function.
+- Common use cases: API calls, event listeners, subscriptions.
+
+## Virtual DOM
+- React keeps a lightweight copy of the real DOM.
+- When state changes, React compares the new Virtual DOM with the old one (diffing).
+- Only the necessary changes are applied to the real DOM (reconciliation).
+
+## Rendering and Reconciliation
+- React batches updates for performance.
+- Keys help React identify which items changed in lists.
+- Incorrect keys can cause rendering bugs or performance issues.
+
+## Conditional Rendering
+- Use `if` statements, ternary operators, or logical `&&`.
+- Allows UI to change based on state or props.
+
+## Lists and Keys
+- Lists are rendered using `map()`.
+- Each list item must have a unique `key`.
+- Keys should be stable and predictable.
+
+## Events
+- Event handlers use camelCase (e.g., `onClick`).
+- Functions are passed, not invoked.
+- Synthetic events normalize behavior across browsers.
+
+## Forms
+- Controlled components store input values in state.
+- Inputs update state via `onChange`.
+- Enables validation and dynamic behavior.
+
+## Context API
+- Used to share data globally (theme, auth, settings).
+- Avoids deeply nested prop passing.
+- Best for data that many components need.
+
+## Lifting State Up
+- Move shared state to the closest common ancestor.
+- Ensures consistent data between components.
+
+## Component Composition
+- Components can contain other components as children.
+- Encourages reusable and flexible UI patterns.
+
+## React Router
+- Used for client-side routing.
+- Enables navigation without full page reloads.
+- Uses routes, links, and parameters.
+
+## Performance Optimization
+- Avoid unnecessary re-renders.
+- Use memoization hooks when needed.
+- Split code with lazy loading and suspense.
+
+## Best Practices
+- Keep components small and focused.
+- Use descriptive component and prop names.
+- Separate logic and presentation when possible.
+- Prefer functional components and hooks.
+- Avoid mutating state directly.
+
+## React Ecosystem
+- Works well with libraries like Redux, Zustand, and React Query.
+- Often paired with frameworks like Next.js for SSR and routing.
+- Strong community and large ecosystem of tools.
+
+## Common Pitfalls
+- Forgetting dependency arrays in `useEffect`.
+- Mutating state instead of creating new objects.
+- Overusing global state.
+- Using array index as a key when list order can change.
+
+## Why React Is Popular
+- Efficient rendering.
+- Strong developer tooling.
+- Massive ecosystem.
+- Scales well for large applications.
+- Backed by Meta and widely adopted in industry
+
 
 # React Part 2: Reactivity
 
