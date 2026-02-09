@@ -34,17 +34,38 @@ export function Notes() {
     </section>
 
     <section aria-label="Existing notes">
-      <h3>Sample Notes (placeholder)</h3>
 
-      <article class="note-card">
-        <h4>CS 313 Project</h4>
-        <p>Remember to break the project into smaller subtasks.</p>
-      </article>
+        <div className="note-stack">
+          <div className="note-card">
+            <div className="tab">CS 313 Project</div>
+            <p>Outline ideas and organize tasks.</p>
+          </div>
+          <div className="note-card">
+            <div className="tab">Math Homework</div>
+            <p>Complete problems 1-20.</p>
+          </div>
+          <div className="note-card">
+            <div className="tab">Send Email</div>
+            <p>Follow up with instructor.</p>
+          </div>
+          <div className="note-card">
+            <div className="tab">Final Essay</div>
+            <p>Draft and revise essay.</p>
+          </div>
+          <div className="note-card">
+            <div className="tab">Lab Report</div>
+            <p>Document experiments.</p>
+          </div>
+          <div className="note-card">
+            <div className="tab">Check Emails</div>
+            <p>Respond to pending messages.</p>
+          </div>
+          <div className="note-card">
+            <div className="tab">Group Project</div>
+            <p>Coordinate with team.</p>
+          </div>
+        </div>
 
-      <article class="note-card">
-        <h4>Math Homework</h4>
-        <p>Review lecture notes before starting problems 5–10.</p>
-      </article>
     </section>
   </main>
   );
