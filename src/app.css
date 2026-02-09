@@ -5,6 +5,11 @@
   flex-direction: column;
 }
 
+.footer {
+  margin-top: auto;
+}
+
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 :root {
   --primary: #01311F;

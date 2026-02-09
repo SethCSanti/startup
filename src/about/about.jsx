@@ -2,8 +2,29 @@ import React from 'react';
 
 export function About() {
   return (
-    <main className="container-fluid bg-secondary text-center">
-      <div>About displayed here</div>
-    </main>
+    <main>
+    <h2>About LoadMap</h2>
+    <p>
+      LoadMap helps college students understand their real workload, not just a flat list of due dates.
+      By weighting tasks and visualizing them across daily, weekly, and monthly views, students can see busy days and plan ahead.
+    </p>
+
+    <section>
+      <h3>Key Ideas</h3>
+      <ul>
+        <li>Visual workload indicators show how heavy each day is.</li>
+        <li>Daily, weekly, and monthly views make planning flexible.</li>
+        <li>School, work, and personal tasks can all live in one place.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>About the Developer</h3>
+      <p>
+        This application is built by a software engineering student who enjoys reading, writing, and playing video games.
+        LoadMap is inspired by the need to balance school, work, and personal time.
+      </p>
+    </section>
+  </main>
   );
 }
