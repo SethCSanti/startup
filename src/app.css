@@ -1,9 +1,9 @@
-.body {
+.app-shell {
+  padding-top: 64px; /* height of navbar */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-width: 375px;
 }
-
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 :root {

@@ -5,8 +5,8 @@ import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Home } from './home/home';
 import { Tasks } from './tasks/tasks';
-import { Notes } from './notes/notes';
 import { Calendar } from './calendar/calendar';
+import { Notes } from './notes/notes';
 import { About } from './about/about';
 
 export default function App() {
@@ -16,9 +16,7 @@ export default function App() {
 
       {/* Navbar */}
       <nav className="navbar fixed-top navbar-dark custom-navbar">
-        <div className="navbar-brand">
-          LoadMap
-        </div>
+        <div className="navbar-brand">LoadMap</div>
 
         <div className="navbar-nav flex-row">
           <NavLink className="nav-link" to="/">Home</NavLink>
