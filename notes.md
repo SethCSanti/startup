@@ -3,7 +3,7 @@
 [LoadMap](README.md)
 
 # Code for Deployment:
-./deployFiles.sh -k ~/260_key_pair.pem -h loadmap.click -s startup
+./deployReact.sh -k ~/260_key_pair.pem -h loadmap.click -s startup
 
 # Helpful links
 
