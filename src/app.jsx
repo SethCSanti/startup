@@ -82,7 +82,7 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-dark text-white-50 mt-5">
         <div className="container-fluid d-flex justify-content-between">
-          <span className="text-reset">Seth Santi</span>
+          <span className="text-reset">Seth Conner</span>
           <a
             className="text-reset"
             href="https://github.com/SethCSanti/startup"
