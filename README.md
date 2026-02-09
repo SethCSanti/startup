@@ -101,9 +101,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - I just followed the commands to install and use Vite.
+- [x] **Components** - Moving the files and folders around along with the html and css code was pretty straightforward but it took a lot to figure out the difference between the home page and app.jsx.
+- [x] **Router** - I had to rework the given router code a good bit once moving my files and folders around.
 
 ## 🚀 React part 2: Reactivity deliverable
 
