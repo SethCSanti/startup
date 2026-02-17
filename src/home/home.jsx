@@ -25,7 +25,7 @@ export function Home() {
           {/* Top banner */}
           <section className="top-banner mb-4">
             <div className="banner-item">
-              <h4>Repository</h4>
+              <h4>Repository - Seth Conner</h4>
               <a
                 href="https://github.com/SethCSanti/startup.git"
                 target="_blank"
