@@ -1030,8 +1030,101 @@ Hooks allow functional components to use React features.
 
 # React Part 2: Reactivity
 
-(notes)
+## Reactivity
+- Reactivity = automatic UI updates when state changes.
+- UI is a function of state.
+- When state updates, React rerenders affected components.
+- Data flows downward via props (parent → child).
 
-```jsx
-(example code)
-```
+## useState
+- Syntax:
+
+    const [color, updateColor] = React.useState('#737AB0');
+
+- `color` = current state value.
+- `updateColor(newValue)` = schedules state update.
+- State is stored internally by React, not directly in the component.
+- Calling the setter triggers a rerender.
+
+## Props
+- Passed from parent to child.
+- Read-only inside child components.
+- Used to pass both data and setter functions.
+
+## Example: Color Picker Reactivity
+
+App component:
+    function App() {
+      const [color, updateColor] = React.useState('#737AB0');
+
+      return (
+        <div>
+          <h1>Pick a color</h1>
+          <ColorDisplay color={color} />
+          <ColorPicker color={color} updateColor={updateColor} />
+        </div>
+      );
+    }
+
+ColorDisplay:
+    function ColorDisplay({ color }) {
+      return (
+        <div>
+          Your color: <span style={{ color: color }}>{color}</span>
+        </div>
+      );
+    }
+
+ColorPicker (controlled input):
+    function ColorPicker({ color, updateColor }) {
+      function onChange(e) {
+        updateColor(e.target.value);
+      }
+
+      return (
+        <div>
+          <span>Pick a color: </span>
+          <input type='color' onChange={onChange} value={color} />
+        </div>
+      );
+    }
+
+## Flow of Reactivity
+1. App holds state.
+2. State passed to children as props.
+3. User changes input.
+4. Setter function runs.
+5. React updates internal state.
+6. React rerenders components that depend on that state.
+7. UI reflects new state.
+
+## Conceptual Internal Model (Simplified)
+
+    let color;
+    let colorNext;
+
+    setInterval(() => {
+      if (colorNext && color !== colorNext) {
+        color = colorNext;
+        root.render(ColorPicker());
+      }
+    }, 50);
+
+    React.useState = (defaultValue) => {
+      color = color || defaultValue;
+      const updateColor = (newColor) => (colorNext = newColor);
+      return [color, updateColor];
+    };
+
+- React stores state externally.
+- Setter updates next value.
+- React detects change.
+- Rerender occurs only when state changes.
+
+## Assignment: React P2 – Reactivity
+- Clone simon-react project.
+- Implement startup reactivity.
+- Deploy application.
+- Backend may be mocked.
+- Startup should function fully and reactively.
+
