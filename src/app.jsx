@@ -27,6 +27,7 @@ export default function App() {
         </div>
       </nav>
 
+      <main className="container-fluid">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tasks" element={<Tasks />} />
@@ -34,7 +35,8 @@ export default function App() {
         <Route path="/notes" element={<Notes />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
+        </Routes>
+      </main>
 
       {/* Main content */}
         
