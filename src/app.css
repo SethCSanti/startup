@@ -147,17 +147,39 @@ button {
   border: none;
   border-radius: 8px;
   padding: 0.4rem 0.75rem;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: 
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.2s ease;
 }
 
+/* Hover = lift */
 button:hover {
-  background-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  background-color: #024c2f; /* slightly lighter than primary */
 }
 
-/* Active / selected filter */
+/* Click = press */
+button:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Active state (like filters or login toggle) */
 button.active {
   background-color: var(--accent);
   color: var(--primary);
+}
+
+/* Optional logout styling */
+button.logout {
+  background-color: #dc3545;
+}
+
+button.logout:hover {
+  background-color: #b02a37;
 }
 
 body {

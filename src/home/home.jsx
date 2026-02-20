@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function Home() {
+  const [user, setUser] = useState(() => {
+    return localStorage.getItem("user") || "Guest";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("user", user);
+  }, [user]);
+
+  const handleLogin = () => {
+    if (user === "Guest") {
+      const name = prompt("Enter your name:");
+      if (name) setUser(name);
+    } else {
+      setUser("Guest");
+    }
+  };
+
   return (
     <main className="container my-4">
-
           <div className="card mb-3">
             <div className="card-body">
               <h5>Live Tasks Overview</h5>
@@ -38,10 +54,15 @@ export function Home() {
             <div className="banner-item banner-login">
               <h4>Login</h4>
               <p>
-                Logged in as: <strong>Guest (mock)</strong>
+                Logged in as: <strong>{user}</strong>
               </p>
-              <button type="button" className="btn btn-success">
-                Log In
+
+              <button
+                type="button"
+                className="button"
+                onClick={handleLogin}
+              >
+                {user === "Guest" ? "Log In" : "Log Out"}
               </button>
             </div>
           </section>
