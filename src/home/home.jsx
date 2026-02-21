@@ -72,9 +72,21 @@ export function Home() {
             <h3>Application Gallery</h3>
 
             <div className="gallery-grid">
-              <img src="/images/app_sketch.png" alt="App sketch" />
-              <div className="gallery-placeholder">Screenshot 2</div>
-              <div className="gallery-placeholder">Screenshot 3</div>
+              <div className="gallery-item">
+                <img src="/public/app_sketch.png" alt="App sketch" />
+              </div>
+
+              <div className="gallery-item">
+                <div className="gallery-placeholder">Mockup 2</div>
+              </div>
+
+              <div className="gallery-item">
+                <div className="gallery-placeholder">Mockup 3</div>
+              </div>
+
+              <div className="gallery-item">
+                <div className="gallery-placeholder">Mockup 4</div>
+              </div>
             </div>
           </section>
 
