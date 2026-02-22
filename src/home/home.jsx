@@ -18,6 +18,8 @@ export function Home() {
     }
   };
 
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <>
       {/* ---------- Utility Bar ---------- */}
@@ -74,7 +76,11 @@ export function Home() {
 
           <div className="gallery-grid">
             <div className="gallery-item">
-              <img src="/app_sketch.png" alt="App sketch" />
+              <img
+                src="/app_sketch.png"
+                alt="App sketch"
+                onClick={() => setSelectedImage("/app_sketch.png")}
+              />
             </div>
 
             <div className="gallery-item">
@@ -89,6 +95,21 @@ export function Home() {
               <div className="gallery-placeholder">Mockup 4</div>
             </div>
           </div>
+
+          {/* Fullscreen Overlay */}
+          {selectedImage && (
+            <div
+              className="fullscreen-overlay"
+              onClick={() => setSelectedImage(null)}
+            >
+              <img
+                src={selectedImage}
+                alt="Full view"
+                className="fullscreen-image"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          )}
         </section>
 
       </main>
