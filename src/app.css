@@ -159,6 +159,12 @@ button.logout:hover {
   background-color: #b02a37;
 }
 
+.add-task-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem; /* optional spacing */
+}
+
 .tasks {
   max-width: 1000px;
   margin: 0 auto;
