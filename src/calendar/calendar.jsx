@@ -1,52 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export function Calendar() {
+  const [filter, setFilter] = useState("All");
+
+  const categories = ["All", "School", "Work", "Personal"];
+
   return (
-    <main>
-    <p>
-      This calendar highlights heavy days in red and lighter days in green so students can see stressful weeks at a glance.
-    </p>
+    <main className="calendar-page container-fluid">
 
-  <section id="task-filter-placeholder" class="placeholder">
-  <h3>Filter (placeholder)</h3>
-  <p>Future version will allow filtering tasks by category: School, Work, Personal.</p>
-  
-  <div class="d-flex gap-2 flex-wrap">
-    <button type="button" class="btn btn-primary btn-sm">All</button>
-    <button type="button" class="btn btn-outline-primary btn-sm">School</button>
-    <button type="button" class="btn btn-outline-primary btn-sm">Work</button>
-    <button type="button" class="btn btn-outline-primary btn-sm">Personal</button>
-  </div>
-</section>
+      {/* Utility Bar */}
+      <section className="calendar-utility-bar">
 
-    <section class="calendar-legend">
-      <h3>Workload Legend</h3>
-      <p><span class="legend-box low"></span> Low workload (green)</p>
-      <p><span class="legend-box medium"></span> Medium workload (yellow)</p>
-      <p><span class="legend-box high"></span> High workload (red)</p>
-    </section>
+        {/* FILTER BUTTONS */}
+        <div className="filters">
+          {["All", "School", "Work", "Health", "Personal"].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={filter === cat ? "active" : ""}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-    <section class="calendar-placeholder">
-      <h3>Workload Calendar (placeholder)</h3>
-      <p>Future version will display a full monthly calendar with colored days.</p>
+        {/* Legend */}
+        <div className="calendar-legend-inline">
+          <span><span className="legend-box low"></span> Low</span>
+          <span><span className="legend-box medium"></span> Medium</span>
+          <span><span className="legend-box high"></span> High</span>
+        </div>
 
-      <div class="day-grid">
-        <div class="day low">1</div>
-        <div class="day medium">2</div>
-        <div class="day high">3</div>
-        <div class="day low">4</div>
-        <div class="day medium">5</div>
-        <div class="day high">6</div>
-        <div class="day low">7</div>
-      </div>
-    </section>
+      </section>
 
-    <section class="placeholder">
-      <h3>3rd Party API [Google Calendar Integration] (placeholder)</h3>
-      <p>
-        Here we will embed a Google Calendar so users can sync assignments with their existing calendar.
-      </p>
-    </section>
-  </main>
+      {/* Calendar Area */}
+      <section className="calendar-main">
+
+        <div className="calendar-header">
+          <h3>March 2026</h3>
+        </div>
+
+        <div className="calendar-grid">
+          {/* Weekday headers */}
+          <div className="calendar-day-header">Sun</div>
+          <div className="calendar-day-header">Mon</div>
+          <div className="calendar-day-header">Tue</div>
+          <div className="calendar-day-header">Wed</div>
+          <div className="calendar-day-header">Thu</div>
+          <div className="calendar-day-header">Fri</div>
+          <div className="calendar-day-header">Sat</div>
+
+          {/* Sample month days */}
+          {[...Array(31)].map((_, i) => {
+            const day = i + 1;
+
+            let workloadClass = "";
+            if (day % 3 === 0) workloadClass = "high";
+            else if (day % 2 === 0) workloadClass = "medium";
+            else workloadClass = "low";
+
+            return (
+              <div key={day} className={`calendar-day ${workloadClass}`}>
+                {day}
+              </div>
+            );
+          })}
+        </div>
+
+      </section>
+
+      {/* API Placeholder */}
+      <section className="calendar-api-placeholder">
+        <h4>Google Calendar Integration (Coming Soon)</h4>
+        <p>
+          Future version will allow syncing assignments directly with your
+          Google Calendar.
+        </p>
+      </section>
+
+    </main>
   );
 }
