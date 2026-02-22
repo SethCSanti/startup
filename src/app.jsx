@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import './app.css';
 
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
@@ -50,23 +51,27 @@ export default function App() {
             target="_blank"
             rel="noreferrer"
           >
-            GH
+            <FaGithub />
           </a>
 
           <a
             className="social-icon"
             title="LinkedIn"
-            href="#"
+            href="https://www.linkedin.com/in/seth-conner-ba580b2a9"
+            target="_blank"
+            rel="noreferrer"
           >
-            LI
+            <FaLinkedin />
           </a>
 
           <a
             className="social-icon"
             title="Instagram"
-            href="#"
+            href="https://www.instagram.com/sethcsanti/"
+            target="_blank"
+            rel="noreferrer"
           >
-            IG
+            <FaInstagram />
           </a>
         </footer>
 

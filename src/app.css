@@ -484,3 +484,22 @@ button.logout:hover {
   align-items: center;
   gap: 0.75rem;
 }
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.05);
+  font-size: 1.2rem;
+  color: var(--accent);
+  transition: all 0.25s ease;
+}
+
+.social-icon:hover {
+  background-color: var(--accent);
+  color: black;
+  transform: translateY(-3px);
+}
