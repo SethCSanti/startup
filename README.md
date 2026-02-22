@@ -109,8 +109,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I added the login feature (making certain pages invisible), add the filter function for tasks and notes, added functionality to add new notes and tasks, made the click away feature reactive for the tasks, and connected the calendar to the tasks that are made to show which days have tasks due and how many (along with the various pop up pages for adding tasks, notes, and seeing tasks on calendar days.)
+- [x] **Hooks** - useState manages application state such as tasks, notes, and authentication, while useEffect persists data to localStorage to maintain state across sessions. Hooks enable reactive UI updates throughout the application.
 
 ## 🚀 Service deliverable
 
