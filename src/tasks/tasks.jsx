@@ -144,14 +144,14 @@ export function Tasks() {
       {/* ADD TASK MODAL */}
       {showModal && (
         <div
-          className="modal-overlay"
+          className="calendar-modal-overlay"
           onClick={() => setShowModal(false)}
         >
           <div
-            className="modal-content"
+            className="calendar-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
-            <h4>Add New Task</h4>
+            <h3>Add New Task</h3>
 
             <form
               onSubmit={(e) => {
@@ -175,18 +175,18 @@ export function Tasks() {
               <input
                 name="title"
                 placeholder="Task name"
-                className="form-control mb-2"
+                className="form-control mb-3"
                 required
               />
 
-              <select name="category" className="form-control mb-2">
+              <select name="category" className="form-control mb-3">
                 <option>School</option>
                 <option>Work</option>
                 <option>Health</option>
                 <option>Personal</option>
               </select>
 
-              <select name="weight" className="form-control mb-2">
+              <select name="weight" className="form-control mb-3">
                 <option value="light">Light</option>
                 <option value="medium">Medium</option>
                 <option value="heavy">Heavy</option>
@@ -195,7 +195,7 @@ export function Tasks() {
               <input
                 type="date"
                 name="dueDate"
-                className="form-control mb-3"
+                className="form-control mb-4"
                 required
               />
 
