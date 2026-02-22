@@ -1,23 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export function Home() {
-  const [user, setUser] = useState(() => {
-    return localStorage.getItem("user") || "Guest";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("user", user);
-  }, [user]);
-
-  const handleLogin = () => {
-    if (user === "Guest") {
-      const name = prompt("Enter your name:");
-      if (name) setUser(name);
-    } else {
-      setUser("Guest");
-    }
-  };
-
+export function Home({ user, login, logout }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
@@ -35,14 +18,18 @@ export function Home() {
         </div>
 
         <div className="utility-right">
-          <span>
-            Logged in as: <strong>{user}</strong>
-          </span>
-
+          Logged in as: <strong>{user}</strong>
           <button
             type="button"
             className={`button ${user !== "Guest" ? "logout" : ""}`}
-            onClick={handleLogin}
+            onClick={() => {
+              if (user === "Guest") {
+                const name = prompt("Enter your name:");
+                if (name) login(name);
+              } else {
+                logout();
+              }
+            }}
           >
             {user === "Guest" ? "Log In" : "Log Out"}
           </button>
@@ -84,15 +71,15 @@ export function Home() {
             </div>
 
             <div className="gallery-item">
-              <div className="gallery-placeholder">Mockup 2</div>
+              <div className="gallery-placeholder">Optional Img</div>
             </div>
 
             <div className="gallery-item">
-              <div className="gallery-placeholder">Mockup 3</div>
+              <div className="gallery-placeholder">Optional Img</div>
             </div>
 
             <div className="gallery-item">
-              <div className="gallery-placeholder">Mockup 4</div>
+              <div className="gallery-placeholder">Optional Img</div>
             </div>
           </div>
 
