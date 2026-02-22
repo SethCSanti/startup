@@ -698,7 +698,7 @@ button.logout:hover {
 /* ===== NOTEBOOK ===== */
 
 .notebook {
-  background: #fdfcf7;
+  background: rgba(253, 252, 247, 0.9);
   border-radius: 16px;
   padding: 0;
   box-shadow: 0 15px 40px rgba(0,0,0,0.15);
@@ -758,4 +758,75 @@ button.logout:hover {
 
 .note-text {
   line-height: 1.6;
+}
+
+
+.about-page {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.about-container {
+  background: rgba(0, 0, 0, 0.6); /* dark transparent */
+  backdrop-filter: blur(8px); /* glass effect */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.about-container h2,
+.about-container h3 {
+  margin-bottom: 1rem;
+}
+
+.about-container ul {
+  padding-left: 1.2rem;
+}
+
+.tasks-page {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tasks-container {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1200px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.notes-container {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1200px;
+  color: var(--text-primary);  /* ✅ use global dark text */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.home-page {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.home-container {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1200px;
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }

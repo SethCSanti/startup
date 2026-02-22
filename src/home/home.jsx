@@ -37,7 +37,8 @@ export function Home({ user, login, logout }) {
       </section>
 
       {/* ---------- Main Content ---------- */}
-      <main className="container my-4">
+      <main className="home-page">
+        <div className="home-container">
 
         <div className="card mb-3">
           <div className="card-body">
@@ -99,7 +100,8 @@ export function Home({ user, login, logout }) {
           )}
         </section>
 
-      </main>
+        </div>
+    </main>
     </>
   );
 }

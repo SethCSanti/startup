@@ -144,7 +144,8 @@ Track calories for consistency.`,
     null;
 
   return (
-    <main className="notes-page">
+  <main className="notes-page">
+    <div className="notes-container">
       {/* Utility Bar */}
       <div className="notes-utility-bar">
         <div className="filters">
@@ -286,6 +287,7 @@ Track calories for consistency.`,
           </div>
         </div>
       )}
+        </div>
     </main>
   );
 }
