@@ -1128,3 +1128,319 @@ ColorPicker (controlled input):
 - Backend may be mocked.
 - Startup should function fully and reactively.
 
+
+# Backend Web Service
+## 1. Client–Server Architecture
+
+Client:
+- Sends HTTP requests
+- Receives HTTP responses
+- Often a browser or frontend app
+
+Server:
+- Listens on a port
+- Processes requests
+- Returns responses
+- May serve both APIs and static files
+
+HTTP is:
+- Stateless (each request independent)
+- Request–response based
+
+---
+
+## 2. REST API Design
+
+REST principles:
+- Resources are represented by URLs
+- HTTP methods define actions
+
+Common Methods:
+- GET → retrieve data
+- POST → create data
+- PUT → update data
+- DELETE → remove data
+
+Good API design:
+- Use clear route structure
+- Use proper HTTP status codes
+- Return JSON for structured data
+
+Example route pattern:
+
+    /api/resource
+    /api/resource/:id
+
+---
+
+## 3. Express Framework (Node.js)
+
+Express is:
+- A minimal web framework for Node.js
+- Used to define routes and middleware
+
+Basic structure:
+
+    const express = require('express');
+    const app = express();
+
+Routes:
+
+    app.get('/path', handler);
+    app.post('/path', handler);
+
+Server start:
+
+    app.listen(port);
+
+---
+
+## 4. Middleware
+
+Middleware:
+- Functions that run during request processing
+- Can modify request or response
+- Can terminate request or pass control
+
+Signature:
+
+    (req, res, next)
+
+If next() is called:
+- Control moves to next middleware
+
+If response is sent:
+- Request lifecycle ends
+
+Common middleware uses:
+- Authentication
+- Logging
+- JSON parsing
+- Error handling
+
+---
+
+## 5. JSON Parsing
+
+Servers often receive JSON in request bodies.
+
+Enable parsing:
+
+    app.use(express.json());
+
+Effect:
+- Automatically parses JSON
+- Makes data available on req.body
+
+---
+
+## 6. Cookies & Sessions
+
+Cookies:
+- Small pieces of data stored in browser
+- Sent automatically with each request
+
+Used for:
+- Session tracking
+- Authentication tokens
+
+Secure cookie options:
+- httpOnly → not accessible via JavaScript
+- secure → HTTPS only
+- sameSite → restricts cross-site sending
+
+Session pattern:
+1. Server generates token
+2. Sends token in cookie
+3. Client includes cookie in future requests
+4. Server validates token
+
+---
+
+## 7. Authentication Concepts
+
+Authentication = verifying identity.
+
+Common approach:
+- Store hashed passwords
+- Never store plaintext passwords
+
+Password hashing:
+
+    bcrypt.hash(password, saltRounds)
+
+Password verification:
+
+    bcrypt.compare(input, storedHash)
+
+Token-based authentication:
+- Generate random token (e.g., UUID)
+- Associate token with user
+- Validate token on protected routes
+
+---
+
+## 8. Authorization Middleware
+
+Authorization:
+- Determines whether user can access a resource
+
+Pattern:
+
+    const verifyAuth = (req, res, next) => {
+      if (validUser) {
+        next();
+      } else {
+        res.status(401).send();
+      }
+    };
+
+Attach to routes:
+
+    app.get('/protected', verifyAuth, handler);
+
+If unauthorized:
+- Route handler never runs
+
+---
+
+## 9. In-Memory vs Persistent Storage
+
+In-memory storage:
+- Uses variables/arrays
+- Fast
+- Data lost on server restart
+
+Persistent storage:
+- Database (SQL/NoSQL)
+- Survives restarts
+- Scales better
+
+Tradeoffs:
+- Memory → simple, temporary
+- Database → durable, scalable
+
+---
+
+## 10. Static File Serving
+
+Servers can serve:
+- HTML
+- CSS
+- JavaScript
+- Images
+
+Example:
+
+    app.use(express.static('public'));
+
+Behavior:
+- Looks for requested file in directory
+- Returns file if found
+
+---
+
+## 11. Development vs Production
+
+Development:
+- Separate frontend and backend servers
+- Often different ports
+- Use proxy to avoid CORS issues
+
+Example proxy concept:
+
+    '/api' → http://localhost:3000
+
+Production:
+- Single server serves:
+  - API endpoints
+  - Static frontend files
+
+---
+
+## 12. Fetch API (Frontend)
+
+Used to make HTTP requests from browser:
+
+    fetch('/api/resource', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+Returns:
+- Promise
+- Must call .json() to parse body
+
+Asynchronous model:
+- Non-blocking
+- Uses Promises
+
+---
+
+## 13. HTTP Status Codes (Core Set)
+
+- 200 → OK
+- 201 → Created
+- 204 → No Content
+- 400 → Bad Request
+- 401 → Unauthorized
+- 403 → Forbidden
+- 404 → Not Found
+- 409 → Conflict
+- 500 → Server Error
+
+Proper status codes:
+- Improve API clarity
+- Help debugging
+- Follow REST standards
+
+---
+
+## 14. Error Handling
+
+Centralized error middleware:
+
+    app.use((err, req, res, next) => {
+      res.status(500).send({ message: err.message });
+    });
+
+Purpose:
+- Catch unhandled errors
+- Prevent server crashes
+- Return structured error responses
+
+---
+
+## 15. Key Architectural Patterns
+
+1. Separation of concerns
+   - Routing
+   - Middleware
+   - Business logic
+
+2. Stateless HTTP + Stateful sessions via cookies
+
+3. Layered request flow:
+   Client → Middleware → Route Handler → Response
+
+4. Secure authentication:
+   - Hash passwords
+   - Use tokens
+   - Protect routes
+
+---
+
+## Core Concepts to Understand
+
+- HTTP request/response lifecycle
+- RESTful routing
+- Middleware chaining
+- Cookie-based session auth
+- Password hashing
+- JSON parsing
+- Static file serving
+- Dev vs production architecture
+- Asynchronous JavaScript (Promises)
+
+---
