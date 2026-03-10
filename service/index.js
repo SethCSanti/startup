@@ -13,8 +13,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'dist')));
-
 let tasks = [];
 let users = [];
 
@@ -85,8 +83,11 @@ app.delete('/api/tasks/:id', (req, res) => {
   res.send({});
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+// Serve React app
+app.use(express.static(__dirname));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(port, () => {
