@@ -118,7 +118,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **Node.js/Express HTTP service** - I created a backend service using Express in a separate service directory that runs on port 4000.
 - [x] **Static middleware for frontend** - I added Express static middleware so the server can serve the frontend files when deployed.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
+- [x] **Calls to third party endpoints** - The frontend calls a public advice API using fetch and displays the returned data on the home dashboard. (quotes)
 - [x] **Backend service endpoints** - I created API endpoints for tasks including GET, POST, and DELETE requests.
 - [x] **Frontend calls service endpoints** - The React frontend uses fetch to call backend endpoints.
 - [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.

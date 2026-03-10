@@ -2,6 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 export function Home({ user, login, logout }) {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [quote, setQuote] = useState("");
+
+  useEffect(() => {
+  async function loadQuote() {
+    const response = await fetch("https://api.adviceslip.com/advice");
+    const data = await response.json();
+    setQuote(data.slip.advice);
+  }
+
+  loadQuote();
+}, []);
 
   return (
     <>
@@ -55,6 +66,13 @@ export function Home({ user, login, logout }) {
             <h5>Live Notes Overview</h5>
             <p>Stored in database (placeholder)</p>
             <p>Synced across devices (placeholder WebSocket)</p>
+          </div>
+        </div>
+
+        <div className="card mb-4">
+          <div className="card-body">
+            <h5>Daily Motivation</h5>
+            <p>{quote}</p>
           </div>
         </div>
 
