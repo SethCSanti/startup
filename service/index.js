@@ -13,14 +13,18 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+// Serve frontend files
+app.use(express.static('public'));
+
 let tasks = [];
 let users = [];
 
-// Login Services
+// Test endpoint
 app.get('/api/test', (req, res) => {
   res.send({ msg: "Backend working" });
 });
 
+// Create account
 app.post('/api/auth/create', async (req, res) => {
   const passwordHash = await bcrypt.hash(req.body.password, 10);
 
@@ -31,12 +35,12 @@ app.post('/api/auth/create', async (req, res) => {
   };
 
   users.push(user);
-
   res.send({ id: user.id });
 });
 
+// Login
 app.post('/api/auth/login', async (req, res) => {
-  const user = users.find((u) => u.email === req.body.email);
+  const user = users.find(u => u.email === req.body.email);
 
   if (user && await bcrypt.compare(req.body.password, user.password)) {
     res.send({ id: user.id });
@@ -45,20 +49,17 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Logout
 app.post('/api/auth/logout', (req, res) => {
   res.send({});
 });
 
+// Restricted example
 app.get('/api/restricted', (req, res) => {
-  if (users.length === 0) {
-    res.status(401).send({ msg: "Login required" });
-    return;
-  }
-
-  res.send({ msg: "Restricted data accessed." });
+  res.send({ msg: "Restricted endpoint example" });
 });
 
-// Task Services
+// Tasks
 app.get('/api/tasks', (req, res) => {
   res.send(tasks);
 });
@@ -68,7 +69,7 @@ app.post('/api/tasks', (req, res) => {
     id: uuid.v4(),
     title: req.body.title,
     dueDate: req.body.dueDate,
-    weight: req.body.weight,
+    weight: req.body.weight
   };
 
   tasks.push(task);
@@ -76,13 +77,11 @@ app.post('/api/tasks', (req, res) => {
 });
 
 app.delete('/api/tasks/:id', (req, res) => {
-  tasks = tasks.filter((t) => t.id !== req.params.id);
+  tasks = tasks.filter(t => t.id !== req.params.id);
   res.send({});
 });
 
-// Serve React frontend
-app.use(express.static('public'));
-
+// React router fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
