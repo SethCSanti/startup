@@ -121,7 +121,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Calls to third party endpoints** - The frontend calls a public advice API using fetch and displays the returned data on the home dashboard. (quotes)
 - [x] **Backend service endpoints** - I created API endpoints for tasks including GET, POST, and DELETE requests.
 - [x] **Frontend calls service endpoints** - The React frontend uses fetch to call backend endpoints.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Supports registration, login, logout, and restricted endpoint** - I implemented backend authentication endpoints for user registration, login, and logout using Express. Passwords are hashed using bcrypt, and a restricted endpoint was added to demonstrate protected API routes.
 
 
 ## 🚀 DB deliverable

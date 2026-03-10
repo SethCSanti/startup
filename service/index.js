@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const uuid = require('uuid');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 
@@ -14,11 +15,51 @@ app.use(cors());
 app.use(express.static('public'));
 
 let tasks = [];
+let users = [];
 
+// Login Services
 app.get('/api/test', (req, res) => {
   res.send({ msg: "Backend working" });
 });
 
+app.post('/api/auth/create', async (req, res) => {
+  const passwordHash = await bcrypt.hash(req.body.password, 10);
+
+  const user = {
+    id: uuid.v4(),
+    email: req.body.email,
+    password: passwordHash
+  };
+
+  users.push(user);
+
+  res.send({ id: user.id });
+});
+
+app.post('/api/auth/login', async (req, res) => {
+  const user = users.find((u) => u.email === req.body.email);
+
+  if (user && await bcrypt.compare(req.body.password, user.password)) {
+    res.send({ id: user.id });
+  } else {
+    res.status(401).send({ msg: "Unauthorized" });
+  }
+});
+
+app.post('/api/auth/logout', (req, res) => {
+  res.send({});
+});
+
+app.get('/api/restricted', (req, res) => {
+  if (users.length === 0) {
+    res.status(401).send({ msg: "Login required" });
+    return;
+  }
+
+  res.send({ msg: "Restricted data accessed." });
+});
+
+// Task Services
 // Get all tasks
 app.get('/api/tasks', (req, res) => {
   res.send(tasks);
