@@ -64,9 +64,7 @@ export function Calendar() {
   return (
     <main className="calendar-page">
       {/* Utility Bar */}
-      <button className="btn btn-outline-dark btn-sm">
-        Connect Google Calendar (API Placeholder, coming soon)
-      </button>
+      
       <div className="calendar-utility-bar">
         <h2 className="calendar-title">
           {today.toLocaleString("default", { month: "long" })} {year}

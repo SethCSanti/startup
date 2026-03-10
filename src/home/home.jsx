@@ -51,23 +51,27 @@ export function Home({ user, login, logout }) {
       <main className="home-page">
         <div className="home-container">
 
-        <div className="card mb-3">
-          <div className="card-body">
-            <h5>Live Tasks Overview</h5>
-            <p>Data loaded from database (placeholder)</p>
-            <p>
-              Status: <strong>Realtime updates enabled (mock)</strong>
-            </p>
-          </div>
-        </div>
+        {user !== "Guest" && (
+          <>
+            <div className="card mb-3">
+              <div className="card-body">
+                <h5>Live Tasks Overview</h5>
+                <p>Data loaded from database (placeholder)</p>
+                <p>
+                  Status: <strong>Realtime updates enabled (mock)</strong>
+                </p>
+              </div>
+            </div>
 
-        <div className="card mb-4">
-          <div className="card-body">
-            <h5>Live Notes Overview</h5>
-            <p>Stored in database (placeholder)</p>
-            <p>Synced across devices (placeholder WebSocket)</p>
-          </div>
-        </div>
+            <div className="card mb-4">
+              <div className="card-body">
+                <h5>Live Notes Overview</h5>
+                <p>Stored in database (placeholder)</p>
+                <p>Synced across devices (placeholder WebSocket)</p>
+              </div>
+            </div>
+          </>
+        )}
 
         <div className="card mb-4">
           <div className="card-body">
