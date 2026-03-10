@@ -3,8 +3,9 @@ const cookieParser = require('cookie-parser');
 const uuid = require('uuid');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 
-const app = express();
+const app = express();   // must come before app.use()
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-app.use(express.static('dist'));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 let tasks = [];
 let users = [];
@@ -82,6 +83,10 @@ app.post('/api/tasks', (req, res) => {
 app.delete('/api/tasks/:id', (req, res) => {
   tasks = tasks.filter((t) => t.id !== req.params.id);
   res.send({});
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(port, () => {
