@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(cors());
 
 // Serve frontend files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 let tasks = [];
 let users = [];
@@ -81,9 +81,9 @@ app.delete('/api/tasks/:id', (req, res) => {
   res.send({});
 });
 
-// React router fallback
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// React router fallback (MUST BE LAST)
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 app.listen(port, () => {
