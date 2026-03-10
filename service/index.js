@@ -82,7 +82,7 @@ app.delete('/api/tasks/:id', (req, res) => {
 });
 
 // React router fallback
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
