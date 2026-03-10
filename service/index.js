@@ -5,7 +5,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 
-const app = express();   // must come before app.use()
+const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -59,12 +59,10 @@ app.get('/api/restricted', (req, res) => {
 });
 
 // Task Services
-// Get all tasks
 app.get('/api/tasks', (req, res) => {
   res.send(tasks);
 });
 
-// Create a task
 app.post('/api/tasks', (req, res) => {
   const task = {
     id: uuid.v4(),
@@ -77,13 +75,12 @@ app.post('/api/tasks', (req, res) => {
   res.send(task);
 });
 
-// Delete task
 app.delete('/api/tasks/:id', (req, res) => {
   tasks = tasks.filter((t) => t.id !== req.params.id);
   res.send({});
 });
 
-// Serve React build
+// Serve React frontend
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
