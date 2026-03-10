@@ -116,11 +116,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - I created a backend service using Express in a separate service directory that runs on port 4000.
+- [x] **Static middleware for frontend** - I added Express static middleware so the server can serve the frontend files when deployed.
 - [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Backend service endpoints** - I created API endpoints for tasks including GET, POST, and DELETE requests.
+- [x] **Frontend calls service endpoints** - The React frontend uses fetch to call backend endpoints.
 - [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
 
 
