@@ -1130,6 +1130,7 @@ ColorPicker (controlled input):
 
 
 # Backend Web Service
+
 ## 1. Client–Server Architecture
 
 Client:
@@ -1442,5 +1443,207 @@ Purpose:
 - Static file serving
 - Dev vs production architecture
 - Asynchronous JavaScript (Promises)
+
+---
+
+# Data Services
+
+## Overview
+- Data services allow applications to **store, retrieve, and manage data through APIs and databases**.
+- Typical web architecture:
+  - **Frontend:** Browser (HTML, CSS, JavaScript, React)
+  - **Backend:** Node.js web services
+  - **Database:** MongoDB Atlas
+  - **Infrastructure:** AWS EC2 server, Route53 DNS, security groups
+- Flow:  
+  Users → Web browser → HTTPS → Web server → Node.js API → Database → Response returned to client. :contentReference[oaicite:0]{index=0}
+
+---
+
+## Example API Service (High Scores)
+
+## Endpoint
+```
+GET /api/scores
+```
+
+## Example Function
+```
+function getHighScores() {
+  const query = {score: {$gt:0, $lt:900}};
+  const options = {limit: 10};
+  const cursor = scores.find(query, options);
+  return cursor.toArray();
+}
+```
+
+- Filters scores between **0 and 900**
+- Limits results to **10 records**
+- Returns **JSON documents** from MongoDB.
+
+Example result:
+
+```
+{
+ "_id": "...",
+ "name": "Professor Jensen",
+ "score": 337,
+ "date": "2/24/2025",
+ "ip": "128.187.112.3"
+}
+```
+
+---
+
+## Database Types
+
+| Database | Specialty |
+|---|---|
+| MySQL | Relational queries |
+| Redis | In-memory cache |
+| ElasticSearch | Text search |
+| MongoDB | JSON documents |
+| DynamoDB | Key-value storage |
+| Neo4J | Graph data |
+| InfluxDB | Time-series data |
+
+---
+
+## MongoDB
+
+## Characteristics
+- **NoSQL document database**
+- Stores data as **JSON-like documents**
+- **Schema flexible** (documents can have different fields)
+
+Example:
+
+```
+{
+ _id: '63b9da7f79',
+ name: 'Mystery player',
+ score: 0,
+ date: '1/7/2023'
+}
+```
+
+- Fields can be **added or omitted**
+- Supports **arrays and nested objects**
+
+---
+
+## MongoDB Atlas
+
+- Cloud-hosted MongoDB database
+- Features:
+  - Automatic scaling
+  - Managed infrastructure
+  - Security and backups
+  - Easy deployment
+
+---
+
+## Secure Configuration
+
+Database credentials stored in:
+
+```
+dbConfig.json
+```
+
+Example:
+
+```
+{
+ "hostname": "...mongodb.net",
+ "userName": "...",
+ "password": "..."
+}
+```
+
+Important:
+- **Do NOT commit credentials to GitHub**
+
+---
+
+## Installing MongoDB in Node
+
+```
+mkdir testMongo
+cd testMongo
+npm init -y
+npm install mongodb
+```
+
+Installs the **MongoDB Node.js driver**.
+
+---
+
+## Connecting to MongoDB
+
+```
+const { MongoClient } = require('mongodb');
+const config = require('./dbConfig.json');
+
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+
+const client = new MongoClient(url);
+const db = client.db('rental');
+const collection = db.collection('house');
+```
+
+Steps:
+1. Import MongoDB client
+2. Load credentials
+3. Create connection
+4. Select database
+5. Select collection
+
+---
+
+## Testing the Connection
+
+```
+await db.command({ ping: 1 });
+```
+
+- Confirms the database is reachable.
+
+---
+
+## CRUD Operations
+
+## Insert
+```
+await collection.insertOne(house);
+```
+
+## Query
+```
+collection.find();
+collection.find({beds: {$gte: 2}});
+collection.find({status:'open', beds:{$lt:3}});
+collection.find({$or:[{beds:{$lt:3}}, {price:{$lt:1000}}]});
+collection.find({summary: /(modern|beach)/i});
+```
+
+## Query Options
+```
+const options = {
+ sort: { score: -1 },
+ limit: 10
+};
+```
+
+## Update
+```
+await collection.updateMany(query, { $set: { beds: 2 } });
+```
+
+## Delete
+```
+await collection.deleteMany(query);
+await collection.deleteOne({_id: id});
+```
 
 ---
