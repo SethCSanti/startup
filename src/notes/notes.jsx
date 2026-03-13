@@ -10,111 +10,21 @@ export function Notes() {
   if (stored) return JSON.parse(stored);
 
   return [
-    {
-      id: 1,
-      title: "CS 313 Project Planning",
-      category: "School",
-      taskId: "",
-      text: `Break project into milestones:
-• UI wireframe
-• Component architecture
-• State management
-• API integration
+  {
+    id: 1,
+    title: "Welcome to Notes",
+    category: "Personal",
+    taskId: "",
+    text: `Use this notebook to track ideas, reflections, or planning.
 
-Focus on modular design and reusable components.
-Remember to test localStorage edge cases.`,
-    },
-    {
-      id: 2,
-      title: "Exam Study Strategy",
-      category: "School",
-      taskId: "",
-      text: `Prioritize:
-1. Algorithms
-2. Recursion
-3. Time complexity
+Tips:
+• Click "+ Add Note" to create a new note
+• Use categories to organize your notes
+• You can link notes to tasks from the Tasks page
 
-Create flashcards for big-O patterns.
-Do 2 practice exams before Friday.`,
-    },
-    {
-      id: 3,
-      title: "Team Meeting Notes",
-      category: "Work",
-      taskId: "",
-      text: `Agenda:
-• Q2 deliverables
-• Feature backlog cleanup
-• Deployment timeline
-
-Action Items:
-– Refactor dashboard logic
-– Improve error handling in tasks page`,
-    },
-    {
-      id: 4,
-      title: "Workout Plan",
-      category: "Health",
-      taskId: "",
-      text: `Monday – Push
-Wednesday – Pull
-Friday – Legs
-
-Add 10 min core work each session.
-Increase squat weight next week.`,
-    },
-    {
-      id: 5,
-      title: "Daily Reflection",
-      category: "Personal",
-      taskId: "",
-      text: `Wins:
-• Finished calendar integration
-• Improved modal consistency
-
-Improve tomorrow:
-• Add edit note feature
-• Clean up CSS structure`,
-    },
-    {
-      id: 6,
-      title: "API Integration Ideas",
-      category: "Work",
-      taskId: "",
-      text: `Google Calendar Sync Plan:
-• OAuth flow
-• Store refresh token
-• Sync tasks as events
-• Handle timezones properly
-
-Potential stretch goal: Two-way sync.`,
-    },
-    {
-      id: 7,
-      title: "Essay Brainstorm",
-      category: "School",
-      taskId: "",
-      text: `Thesis direction:
-How digital productivity tools reshape student stress patterns.
-
-Include:
-• Data on workload visualization
-• Cognitive load theory
-• Calendar-based prioritization`,
-    },
-    {
-      id: 8,
-      title: "Meal Prep Plan",
-      category: "Health",
-      taskId: "",
-      text: `Prep:
-• Chicken & rice bowls
-• Overnight oats
-• Protein snacks
-
-Track calories for consistency.`,
-    },
-  ];
+Start by creating your first note!`
+  }
+];
 });
 
   const [tasks, setTasks] = useState([]);
