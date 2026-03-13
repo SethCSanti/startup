@@ -116,12 +116,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Node.js/Express HTTP service** - I created a backend service using Express in a separate service directory that runs on port 4000.
-- [x] **Static middleware for frontend** - I added Express static middleware so the server can serve the frontend files when deployed.
-- [x] **Calls to third party endpoints** - The frontend calls a public advice API using fetch and displays the returned data on the home dashboard. (quotes)
-- [x] **Backend service endpoints** - I created API endpoints for tasks including GET, POST, and DELETE requests.
-- [x] **Frontend calls service endpoints** - The React frontend uses fetch to call backend endpoints.
-- [x] **Supports registration, login, logout, and restricted endpoint** - I implemented backend authentication endpoints for user registration, login, and logout using Express. Passwords are hashed using bcrypt, and a restricted endpoint was added to demonstrate protected API routes.
+- [x] **Node.js/Express HTTP service** - I created an Express backend in a separate service directory that runs on port 4000 and handles API requests from the frontend.
+- [x] **Static middleware for frontend** - Express uses static middleware to serve the built frontend files when deployed.
+- [x] **Calls to third party endpoints** - The frontend calls the public Advice Slip API using fetch to retrieve a random motivational quote for the home dashboard.
+- [x] **Backend service endpoints** - Implemented REST API routes for tasks:
+    - GET /api/tasks
+    - POST /api/tasks
+    - DELETE /api/tasks/:id
+    - Tasks are now stored and managed by the backend service instead of local storage.
+- [x] **Frontend calls service endpoints** - The React Tasks component loads, creates, and deletes tasks using fetch requests to the Express API.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Added backend authentication routes. User passwords are hashed using bcrypt before being stored on the server. Implemented a protected route (GET /api/restricted) that verifies a user session via cookies. A test button on the home page demonstrates that the endpoint is accessible only when logged in.
 
 
 ## 🚀 DB deliverable
