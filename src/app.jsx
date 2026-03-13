@@ -22,12 +22,47 @@ export default function App() {
   localStorage.getItem("user") || "Guest"
   );
 
-  const login = (name) => {
-    localStorage.setItem("user", name);
-    setUser(name);
+  const login = async (email, password) => {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, password })
+    });
+
+    const register = async (email, password) => {
+      const response = await fetch("/api/auth/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (response.ok) {
+        alert("Account created. You can now log in.");
+      } else {
+        alert("Registration failed");
+      }
+    };
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem("user", data.id);
+      setUser(data.id);
+    } else {
+      alert("Login failed");
+    }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include"
+    });
+
     localStorage.setItem("user", "Guest");
     setUser("Guest");
   };
