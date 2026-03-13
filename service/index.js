@@ -37,7 +37,16 @@ app.use(cors());
 // Serve frontend files
 app.use(express.static('public'));
 
-let tasks = [];
+let tasks = [
+  {
+    id: uuidv4(),
+    title: "Set up your own tasks!",
+    category: "Personal",
+    weight: "heavy",
+    dueDate: "2026-12-31",
+    clicks: 0
+  }
+];
 let users = [];
 let sessions = {};
 
