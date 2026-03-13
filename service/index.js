@@ -39,6 +39,7 @@ app.use(express.static('public'));
 
 let tasks = [];
 let users = [];
+let sessions = {};
 
 // Test endpoint
 app.get('/api/test', (req, res) => {
@@ -64,6 +65,10 @@ app.post('/api/auth/login', async (req, res) => {
   const user = users.find(u => u.email === req.body.email);
 
   if (user && await bcrypt.compare(req.body.password, user.password)) {
+    const token = uuid.v4();
+    sessions[token] = user.id;
+
+    res.cookie('authToken', token, { httpOnly: true });
     res.send({ id: user.id });
   } else {
     res.status(401).send({ msg: "Unauthorized" });
@@ -72,12 +77,28 @@ app.post('/api/auth/login', async (req, res) => {
 
 // Logout
 app.post('/api/auth/logout', (req, res) => {
+  const token = req.cookies.authToken;
+  delete sessions[token];
+  res.clearCookie('authToken');
   res.send({});
 });
 
-// Restricted example
+app.post('/api/auth/logout', (req, res) => {
+  const token = req.cookies.authToken;
+  delete sessions[token];
+  res.clearCookie('authToken');
+  res.send({});
+});
+
+// Restricted
 app.get('/api/restricted', (req, res) => {
-  res.send({ msg: "Restricted endpoint example" });
+  const token = req.cookies.authToken;
+
+  if (!token || !sessions[token]) {
+    return res.status(401).send({ msg: "Unauthorized" });
+  }
+
+  res.send({ msg: "You are authorized" });
 });
 
 // Tasks
