@@ -7,25 +7,7 @@ const path = require('path');
 
 const app = express();
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
-
-const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
-
-// Connect to the database cluster
-const client = new MongoClient(url);
-const db = client.db('rental');
-const collection = db.collection('house');
-
-async function main() {
-  try {
-    // Test that you can connect to the database
-    await db.command({ ping: 1 });
-    console.log(`DB connected to ${config.hostname}`);
-  } catch (ex) {
-    console.log(`Connection failed to ${url} because ${ex.message}`);
-    process.exit(1);
-  }
-}
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cookieParser());
