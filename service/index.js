@@ -9,9 +9,6 @@ const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
-const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
-
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
 // Connect to the database cluster
