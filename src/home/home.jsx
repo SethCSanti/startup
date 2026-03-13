@@ -33,10 +33,47 @@ export function Home({ user, login, logout }) {
           <button
             type="button"
             className={`button ${user !== "Guest" ? "logout" : ""}`}
-            onClick={() => {
+            onClick={async () => {
               if (user === "Guest") {
-                const name = prompt("Enter your name:");
-                if (name) login(name);
+
+                const email = prompt("Email:");
+                const password = prompt("Password:");
+                const register = confirm("Press OK to register, Cancel to login");
+
+                if (register) {
+                  const response = await fetch("/api/auth/create", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ email, password })
+                  });
+
+                  if (response.ok) {
+                    alert("Account created. Please log in.");
+                  } else {
+                    alert("Registration failed");
+                  }
+
+                } else {
+                  const response = await fetch("/api/auth/login", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ email, password })
+                  });
+
+                  if (response.ok) {
+                    const data = await response.json();
+                    login(data.id);
+                  } else {
+                    alert("Login failed");
+                  }
+                }
+
               } else {
                 logout();
               }

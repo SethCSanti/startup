@@ -1,6 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const uuid = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const path = require('path');
@@ -10,7 +10,7 @@ const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
+const config = require('../dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
@@ -48,24 +48,42 @@ app.get('/api/test', (req, res) => {
 
 // Create account
 app.post('/api/auth/create', async (req, res) => {
-  const passwordHash = await bcrypt.hash(req.body.password, 10);
+  try {
+    console.log("REGISTER BODY:", req.body);
 
-  const user = {
-    id: uuid.v4(),
-    email: req.body.email,
-    password: passwordHash
-  };
+    if (!req.body || !req.body.email || !req.body.password) {
+      return res.status(400).send({ msg: "Missing email or password" });
+    }
 
-  users.push(user);
-  res.send({ id: user.id });
+    if (users.find(u => u.email === req.body.email)) {
+      return res.status(409).send({ msg: "User already exists" });
+    }
+
+    const passwordHash = await bcrypt.hash(req.body.password, 10);
+
+    const user = {
+      id: uuidv4(),
+      email: req.body.email,
+      password: passwordHash
+    };
+
+    users.push(user);
+
+    res.send({ id: user.id });
+
+  } catch (error) {
+    console.error("REGISTER ERROR:", error);
+    res.status(500).send({ msg: "Server error" });
+  }
 });
 
 // Login
 app.post('/api/auth/login', async (req, res) => {
+  console.log("LOGIN BODY:", req.body);
   const user = users.find(u => u.email === req.body.email);
 
   if (user && await bcrypt.compare(req.body.password, user.password)) {
-    const token = uuid.v4();
+    const token = uuidv4();
     sessions[token] = user.id;
 
     res.cookie('authToken', token, { httpOnly: true });
@@ -76,13 +94,6 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // Logout
-app.post('/api/auth/logout', (req, res) => {
-  const token = req.cookies.authToken;
-  delete sessions[token];
-  res.clearCookie('authToken');
-  res.send({});
-});
-
 app.post('/api/auth/logout', (req, res) => {
   const token = req.cookies.authToken;
   delete sessions[token];
@@ -108,7 +119,7 @@ app.get('/api/tasks', (req, res) => {
 
 app.post('/api/tasks', (req, res) => {
   const task = {
-    id: uuid.v4(),
+    id: uuidv4(),
     title: req.body.title,
     dueDate: req.body.dueDate,
     weight: req.body.weight
