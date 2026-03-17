@@ -4,6 +4,10 @@ export function Home({ user, login, logout }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [quote, setQuote] = useState("");
 
+  const [showLogin, setShowLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     async function loadQuote() {
       const response = await fetch("https://api.adviceslip.com/advice");
@@ -21,6 +25,41 @@ export function Home({ user, login, logout }) {
 
     const data = await response.json();
     alert(data.msg);
+  }
+
+  async function handleLogin() {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, password })
+    });
+
+    if (response.ok) {
+      login(email.split("@")[0]);
+      setShowLogin(false);
+    } else {
+      alert("Login failed");
+    }
+  }
+
+  async function handleRegister() {
+    const response = await fetch("/api/auth/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, password })
+    });
+
+    if (response.ok) {
+      alert("Account created. Now log in.");
+    } else {
+      alert("Registration failed");
+    }
   }
 
   return (
@@ -42,52 +81,9 @@ export function Home({ user, login, logout }) {
           <button
             type="button"
             className={`button ${user !== "Guest" ? "logout" : ""}`}
-            onClick={async () => {
+            onClick={() => {
               if (user === "Guest") {
-                const email = prompt("Email:");
-                const password = prompt("Password:");
-
-                if (!email || !password) {
-                  alert("Email and password required");
-                  return;
-                }
-
-                const register = confirm(
-                  "Press OK to register, Cancel to login"
-                );
-
-                if (register) {
-                  const response = await fetch("/api/auth/create", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json"
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ email, password })
-                  });
-
-                  if (response.ok) {
-                    alert("Account created. Please log in.");
-                  } else {
-                    alert("Registration failed");
-                  }
-                } else {
-                  const response = await fetch("/api/auth/login", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json"
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ email, password })
-                  });
-
-                  if (response.ok) {
-                    const data = await response.json();
-                    login(email.split("@")[0]);
-                  } else {
-                    alert("Login failed");
-                  }
-                }
+                setShowLogin(true);
               } else {
                 logout();
               }
@@ -183,6 +179,32 @@ export function Home({ user, login, logout }) {
 
         </div>
       </main>
+      {showLogin && (
+      <div className="login-overlay" onClick={() => setShowLogin(false)}>
+        <div className="login-modal" onClick={(e) => e.stopPropagation()}>
+          <h3>LoadMap Login</h3>
+
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <div className="login-actions">
+            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleRegister}>Register</button>
+          </div>
+        </div>
+      </div>
+    )}
     </>
   );
 }
