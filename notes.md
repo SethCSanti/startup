@@ -1647,3 +1647,219 @@ await collection.deleteOne({_id: id});
 ```
 
 ---
+
+
+# Websocket Notes
+### Overview
+
+WebSocket is a protocol that enables **persistent, bidirectional communication between a client and server**. Unlike HTTP’s request-response model, WebSockets allow **both sides to send messages at any time** after the connection is established. :contentReference[oaicite:0]{index=0}
+
+Common uses:
+- Chat applications
+- Multiplayer games
+- Live notifications
+- Stock updates
+- Real-time dashboards
+
+Connection lifecycle:
+1. Client makes an HTTP request
+2. Connection **upgrades to WebSocket**
+3. Connection stays open for continuous messaging
+
+---
+
+### Typical Web Application Architecture
+
+Modern applications often include WebSockets within a larger infrastructure. :contentReference[oaicite:1]{index=1}
+
+Development tools:
+- VS Code
+- Git
+- GitHub
+- Terminal
+
+Production stack:
+- AWS EC2 web server
+- Node.js backend
+- MongoDB Atlas database
+- Gateway/reverse proxy (Caddy)
+- Security groups
+
+Networking:
+- Route53 DNS
+- HTTPS
+- WebSocket connections
+- SSH/SCP for deployment
+
+Flow:
+
+Users → Browser → Internet → HTTPS/WebSocket → Gateway → Node.js backend → MongoDB
+
+---
+
+### HTTP vs WebSocket
+
+#### HTTP
+
+Best for **client-initiated requests**.
+
+Characteristics:
+- Request → response
+- Server cannot send data independently
+- Connection usually closes after response
+
+Example:
+
+    Client → GET /events
+    Server → response
+    connection closes
+
+Limitations:
+- Inefficient for real-time updates
+- Requires repeated polling
+
+---
+
+#### WebSocket
+
+WebSocket is an **HTTP upgrade that creates a persistent connection**. :contentReference[oaicite:2]{index=2}
+
+Properties:
+- Persistent connection
+- Full-duplex communication
+- Either side can send messages anytime
+- Lower latency
+
+Upgrade request example:
+
+    GET /events HTTP
+    Upgrade: websocket
+    Connection: Upgrade
+
+After upgrade:
+
+    Client ↔ Server (continuous messaging)
+
+---
+
+### Example Real-Time Scenarios
+
+WebSockets enable instant updates such as:
+
+- Breaking news alerts
+- Stock price changes
+- Real-time chat
+- Multiplayer game updates
+
+Example message flow:
+
+User A → Server → User B  
+User B → Server → User A
+
+---
+
+### WebSocket Server (Node.js)
+
+Common Node.js library:
+
+    npm install ws
+
+Example server:
+
+    const { WebSocketServer } = require('ws');
+
+    const wss = new WebSocketServer({ port: 3000 });
+
+    wss.on('connection', (ws) => {
+
+        ws.on('message', (data) => {
+            const msg = String.fromCharCode(...data);
+            console.log('received: %s', msg);
+
+            ws.send(`I heard you say "${msg}"`);
+        });
+
+        ws.send('Hello webSocket');
+    });
+
+Key ideas:
+- `WebSocketServer` creates the server
+- `connection` fires when a client connects
+- `message` handles incoming data
+- `ws.send()` sends data back to client
+
+---
+
+### WebSocket Client (Browser)
+
+Browsers provide a built-in WebSocket API.
+
+Example client:
+
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+
+    const socket = new WebSocket(`${protocol}://${window.location.host}`);
+
+    socket.onmessage = (event) => {
+        console.log('received: ', event.data);
+    };
+
+    socket.onopen = () => {
+        socket.send('I am listening');
+    };
+
+Important events:
+- `onopen` → connection established
+- `onmessage` → data received
+- `send()` → transmit message
+
+---
+
+### Secure WebSockets
+
+Protocols:
+
+ws://  
+Standard WebSocket
+
+wss://  
+Secure WebSocket (TLS encrypted)
+
+Production sites typically use **wss** when running over HTTPS.
+
+---
+
+### Chat Application Model
+
+Typical chat workflow:
+
+1. Clients open WebSocket connections
+2. Server stores active connections
+3. User sends message
+4. Server broadcasts message to other clients
+5. Clients update UI instantly
+
+Architecture:
+
+Client A  
+Client B → Server → Broadcast messages  
+Client C
+
+---
+
+### Advantages of WebSockets
+
+- Persistent connection
+- Real-time communication
+- Low latency
+- Less overhead than repeated HTTP requests
+- Bidirectional messaging
+
+---
+
+### Limitations
+
+- Requires open connections
+- More complex server management
+- Scaling requires connection handling
+- Often needs load balancers or message brokers
