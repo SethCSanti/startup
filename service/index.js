@@ -26,6 +26,22 @@ let tasks = [
     clicks: 0
   }
 ];
+let notes = [
+  {
+    id: uuidv4(),
+    title: "Welcome to Notes",
+    category: "Personal",
+    taskId: "",
+    text: `Use this notebook to track ideas, reflections, or planning.
+
+Tips:
+• Click "+ Add Note" to create a new note
+• Use categories to organize your notes
+• You can link notes to tasks from the Tasks page
+
+Start by creating your first note!`
+  }
+];
 let users = [];
 let sessions = {};
 
@@ -137,6 +153,31 @@ app.post('/api/tasks', (req, res) => {
 
 app.delete('/api/tasks/:id', (req, res) => {
   tasks = tasks.filter(t => t.id !== req.params.id);
+  res.send({});
+});
+
+
+// Notes
+
+app.get('/api/notes', (req, res) => {
+  res.send(notes);
+});
+
+app.post('/api/notes', (req, res) => {
+  const note = {
+    id: uuidv4(),
+    title: req.body.title,
+    text: req.body.text,
+    category: req.body.category,
+    taskId: req.body.taskId
+  };
+
+  notes.push(note);
+  res.send(note);
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+  notes = notes.filter(n => n.id !== req.params.id);
   res.send({});
 });
 

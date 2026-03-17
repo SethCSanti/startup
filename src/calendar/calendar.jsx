@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "../app.css";
 
-const TASKS_KEY = "loadmap_tasks";
-
 export function Calendar() {
   const [tasks, setTasks] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem(TASKS_KEY);
-    if (stored) setTasks(JSON.parse(stored));
+    async function loadTasks() {
+      const response = await fetch("/api/tasks");
+      const data = await response.json();
+      setTasks(data);
+    }
+
+    loadTasks();
   }, []);
 
   const today = new Date();
@@ -32,7 +35,7 @@ export function Calendar() {
     const dayTasks = getTasksForDay(dateString);
     if (dayTasks.length === 0) return "";
 
-    if (dayTasks.length >= 4) return "high";
+    if (dayTasks.length >= 3) return "high";
     if (dayTasks.length >= 2) return "medium";
     return "low";
   };

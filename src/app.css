@@ -814,6 +814,22 @@ button.logout:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
+.delete-note {
+  background: transparent;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+
+  font-size: 0.65rem;
+  padding: 2px 5px;
+
+  border-radius: 4px;
+}
+
+.delete-note:hover {
+  background: #dc3545;
+  color: white;
+}
+
 .home-page {
   padding: 2rem;
   display: flex;
