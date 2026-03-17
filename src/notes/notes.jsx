@@ -7,7 +7,10 @@ const TASKS_KEY = "loadmap_tasks";
 export function Notes() {
   const [notes, setNotes] = useState(() => {
   const stored = localStorage.getItem(NOTES_KEY);
-  if (stored) return JSON.parse(stored);
+
+  if (stored && JSON.parse(stored).length > 0) {
+    return JSON.parse(stored);
+  }
 
   return [
   {

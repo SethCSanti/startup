@@ -100,6 +100,24 @@ app.get('/api/restricted', (req, res) => {
   res.send({ msg: "You are authorized" });
 });
 
+// Check if user session exists
+app.get('/api/auth/me', (req, res) => {
+  const token = req.cookies.authToken;
+
+  if (!token || !sessions[token]) {
+    return res.send({ user: null });
+  }
+
+  const userId = sessions[token];
+  const user = users.find(u => u.id === userId);
+
+  if (!user) {
+    return res.send({ user: null });
+  }
+
+  res.send({ user: user.email });
+});
+
 // Tasks
 app.get('/api/tasks', (req, res) => {
   res.send(tasks);
