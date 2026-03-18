@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const path = require('path');
+const db = require('./database.js');
 
 const app = express();
 
