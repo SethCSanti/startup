@@ -17,34 +17,8 @@ app.use(cors());
 // Serve frontend files
 app.use(express.static('public'));
 
-let tasks = [
-  {
-    id: uuidv4(),
-    title: "Set up your own tasks!",
-    category: "Personal",
-    weight: "heavy",
-    dueDate: "2026-12-31",
-    clicks: 0
-  }
-];
-let notes = [
-  {
-    id: uuidv4(),
-    title: "Welcome to Notes",
-    category: "Personal",
-    taskId: "",
-    text: `Use this notebook to track ideas, reflections, or planning.
+// DB data
 
-Tips:
-• Click "+ Add Note" to create a new note
-• Use categories to organize your notes
-• You can link notes to tasks from the Tasks page
-
-Start by creating your first note!`
-  }
-];
-let users = [];
-let sessions = {};
 
 // Test endpoint
 app.get('/api/test', (req, res) => {
@@ -136,24 +110,43 @@ app.get('/api/auth/me', (req, res) => {
 });
 
 // Tasks
-app.get('/api/tasks', (req, res) => {
+app.get('/api/tasks', async (req, res) => {
+  let tasks = await db.getTasks();
+
+  // 👇 Seed default task if empty
+  if (tasks.length === 0) {
+    const defaultTask = {
+      id: uuidv4(),
+      title: "Set up your own tasks!",
+      category: "Personal",
+      weight: "heavy",
+      dueDate: "2026-12-31",
+      clicks: 0
+    };
+
+    await db.addTask(defaultTask);
+    tasks = [defaultTask];
+  }
+
   res.send(tasks);
 });
 
-app.post('/api/tasks', (req, res) => {
+app.post('/api/tasks', async (req, res) => {
   const task = {
     id: uuidv4(),
     title: req.body.title,
     dueDate: req.body.dueDate,
-    weight: req.body.weight
+    weight: req.body.weight,
+    category: req.body.category,
+    clicks: 0
   };
 
-  tasks.push(task);
+  await db.addTask(task);
   res.send(task);
 });
 
-app.delete('/api/tasks/:id', (req, res) => {
-  tasks = tasks.filter(t => t.id !== req.params.id);
+app.delete('/api/tasks/:id', async (req, res) => {
+  await db.deleteTask(req.params.id);
   res.send({});
 });
 
