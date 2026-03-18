@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
+const config = require('../dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
@@ -22,29 +22,29 @@ const userCollection = db.collection('users');
 })();
 
 // Task functions
-function getTasks() {
-  return taskCollection.find().toArray();
+function getTasks(userId) {
+  return taskCollection.find({ userId }).toArray();
 }
 
 function addTask(task) {
   return taskCollection.insertOne(task);
 }
 
-function deleteTask(id) {
-  return taskCollection.deleteOne({ id: id });
+function deleteTask(id, userId) {
+  return taskCollection.deleteOne({ id: id, userId: userId });
 }
 
 // Note functions
-function getNotes() {
-  return noteCollection.find().toArray();
+function getNotes(userId) {
+  return noteCollection.find({ userId }).toArray();
 }
 
 function addNote(note) {
   return noteCollection.insertOne(note);
 }
 
-function deleteNote(id) {
-  return noteCollection.deleteOne({ id: id });
+function deleteNote(id, userId) {
+  return noteCollection.deleteOne({ id: id, userId: userId });
 }
 
 // User functions
@@ -56,6 +56,10 @@ function addUser(user) {
   return userCollection.insertOne(user);
 }
 
+function getUserById(id) {
+  return userCollection.findOne({ id: id });
+}
+
 module.exports = {
   getTasks,
   addTask,
@@ -64,5 +68,6 @@ module.exports = {
   addNote,
   deleteNote,
   getUser,
+  getUserById,
   addUser
 };

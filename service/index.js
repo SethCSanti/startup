@@ -14,10 +14,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+let sessions = {};
+
 // Serve frontend files
 app.use(express.static('public'));
 
-// DB data
+function getUserIdFromRequest(req) {
+  const token = req.cookies.authToken;
+  return token && sessions[token];
+}
 
 
 // Test endpoint
@@ -28,13 +33,12 @@ app.get('/api/test', (req, res) => {
 // Create account
 app.post('/api/auth/create', async (req, res) => {
   try {
-    console.log("REGISTER BODY:", req.body);
-
-    if (!req.body || !req.body.email || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
       return res.status(400).send({ msg: "Missing email or password" });
     }
 
-    if (users.find(u => u.email === req.body.email)) {
+    // Check if user exists
+    if (await db.getUser(req.body.email)) {
       return res.status(409).send({ msg: "User already exists" });
     }
 
@@ -46,20 +50,19 @@ app.post('/api/auth/create', async (req, res) => {
       password: passwordHash
     };
 
-    users.push(user);
+    await db.addUser(user);
 
     res.send({ id: user.id });
 
   } catch (error) {
-    console.error("REGISTER ERROR:", error);
+    console.error(error);
     res.status(500).send({ msg: "Server error" });
   }
 });
 
 // Login
 app.post('/api/auth/login', async (req, res) => {
-  console.log("LOGIN BODY:", req.body);
-  const user = users.find(u => u.email === req.body.email);
+  const user = await db.getUser(req.body.email);
 
   if (user && await bcrypt.compare(req.body.password, user.password)) {
     const token = uuidv4();
@@ -92,7 +95,7 @@ app.get('/api/restricted', (req, res) => {
 });
 
 // Check if user session exists
-app.get('/api/auth/me', (req, res) => {
+app.get('/api/auth/me', async (req, res) => {
   const token = req.cookies.authToken;
 
   if (!token || !sessions[token]) {
@@ -100,7 +103,7 @@ app.get('/api/auth/me', (req, res) => {
   }
 
   const userId = sessions[token];
-  const user = users.find(u => u.id === userId);
+  const user = await db.getUserById(userId);
 
   if (!user) {
     return res.send({ user: null });
@@ -111,12 +114,18 @@ app.get('/api/auth/me', (req, res) => {
 
 // Tasks
 app.get('/api/tasks', async (req, res) => {
-  let tasks = await db.getTasks();
+  const userId = getUserIdFromRequest(req);
 
-  // 👇 Seed default task if empty
+  if (!userId) {
+    return res.status(401).send({ msg: "Unauthorized" });
+  }
+
+  let tasks = await db.getTasks(userId);
+
   if (tasks.length === 0) {
     const defaultTask = {
       id: uuidv4(),
+      userId: userId,
       title: "Set up your own tasks!",
       category: "Personal",
       weight: "heavy",
@@ -132,8 +141,15 @@ app.get('/api/tasks', async (req, res) => {
 });
 
 app.post('/api/tasks', async (req, res) => {
+  const userId = getUserIdFromRequest(req);
+
+  if (!userId) {
+    return res.status(401).send({ msg: "Unauthorized" });
+  }
+
   const task = {
     id: uuidv4(),
+    userId: userId,
     title: req.body.title,
     dueDate: req.body.dueDate,
     weight: req.body.weight,
@@ -146,20 +162,27 @@ app.post('/api/tasks', async (req, res) => {
 });
 
 app.delete('/api/tasks/:id', async (req, res) => {
-  await db.deleteTask(req.params.id);
+  const userId = getUserIdFromRequest(req);
+
+  await db.deleteTask(req.params.id, userId);
   res.send({});
 });
 
 
 // Notes
-
 app.get('/api/notes', async (req, res) => {
-  let notes = await db.getNotes();
+  const userId = getUserIdFromRequest(req);
 
-  // 👇 Seed default note if empty
+  if (!userId) {
+    return res.status(401).send({ msg: "Unauthorized" });
+  }
+
+  let notes = await db.getNotes(userId);
+
   if (notes.length === 0) {
     const defaultNote = {
       id: uuidv4(),
+      userId: userId,
       title: "Welcome to Notes",
       category: "Personal",
       taskId: "",
@@ -181,8 +204,15 @@ Start by creating your first note!`
 });
 
 app.post('/api/notes', async (req, res) => {
+  const userId = getUserIdFromRequest(req);
+
+  if (!userId) {
+    return res.status(401).send({ msg: "Unauthorized" });
+  }
+
   const note = {
     id: uuidv4(),
+    userId: userId,
     title: req.body.title,
     text: req.body.text,
     category: req.body.category,
@@ -194,7 +224,9 @@ app.post('/api/notes', async (req, res) => {
 });
 
 app.delete('/api/notes/:id', async (req, res) => {
-  await db.deleteNote(req.params.id);
+  const userId = getUserIdFromRequest(req);
+
+  await db.deleteNote(req.params.id, userId);
   res.send({});
 });
 
