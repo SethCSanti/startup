@@ -153,11 +153,34 @@ app.delete('/api/tasks/:id', async (req, res) => {
 
 // Notes
 
-app.get('/api/notes', (req, res) => {
+app.get('/api/notes', async (req, res) => {
+  let notes = await db.getNotes();
+
+  // 👇 Seed default note if empty
+  if (notes.length === 0) {
+    const defaultNote = {
+      id: uuidv4(),
+      title: "Welcome to Notes",
+      category: "Personal",
+      taskId: "",
+      text: `Use this notebook to track ideas, reflections, or planning.
+
+Tips:
+• Click "+ Add Note" to create a new note
+• Use categories to organize your notes
+• You can link notes to tasks from the Tasks page
+
+Start by creating your first note!`
+    };
+
+    await db.addNote(defaultNote);
+    notes = [defaultNote];
+  }
+
   res.send(notes);
 });
 
-app.post('/api/notes', (req, res) => {
+app.post('/api/notes', async (req, res) => {
   const note = {
     id: uuidv4(),
     title: req.body.title,
@@ -166,12 +189,12 @@ app.post('/api/notes', (req, res) => {
     taskId: req.body.taskId
   };
 
-  notes.push(note);
+  await db.addNote(note);
   res.send(note);
 });
 
-app.delete('/api/notes/:id', (req, res) => {
-  notes = notes.filter(n => n.id !== req.params.id);
+app.delete('/api/notes/:id', async (req, res) => {
+  await db.deleteNote(req.params.id);
   res.send({});
 });
 
