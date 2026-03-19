@@ -139,8 +139,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [ ] **Backend listens for WebSocket connection** - I plan to implement a WebSocket server on the backend using the `ws` library to accept client connections and manage active sessions.
+- [ ] **Frontend makes WebSocket connection** - I will connect the frontend to the backend using a WebSocket client and maintain a persistent connection for receiving updates.
+- [ ] **Data sent over WebSocket connection** - I will send real-time updates from the backend whenever tasks or notes are created or deleted, broadcasting changes to all connected clients.
+- [ ] **WebSocket data displayed** - The frontend will listen for WebSocket messages and update the UI dynamically so tasks and notes appear instantly without refreshing.
+- [ ] **Application is fully functional** - The application will support real-time synchronization of tasks and notes across multiple browser sessions using WebSockets.

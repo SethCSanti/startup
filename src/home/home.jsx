@@ -102,27 +102,22 @@ export function Home({ user, login, logout }) {
             <>
               <div className="card mb-3">
                 <div className="card-body">
-                  <h5>Live Tasks Overview</h5>
-                  <p>Data loaded from backend service</p>
+                  <h5>System Status</h5>
+
                   <p>
-                    Status: <strong>Realtime updates enabled (mock)</strong>
+                    Tasks and notes are stored securely in the database and scoped per user.
                   </p>
 
-                  {/* Restricted Endpoint Demo */}
+                  <p>
+                    <strong>Realtime Sync:</strong> WebSocket integration planned to enable live updates across multiple sessions.
+                  </p>
+
                   <button
                     className="btn btn-primary mt-2"
                     onClick={testRestricted}
                   >
-                    Test Restricted Endpoint
+                    Test Auth Endpoint
                   </button>
-                </div>
-              </div>
-
-              <div className="card mb-4">
-                <div className="card-body">
-                  <h5>Live Notes Overview</h5>
-                  <p>Stored in database (placeholder)</p>
-                  <p>Synced across devices (placeholder WebSocket)</p>
                 </div>
               </div>
             </>
