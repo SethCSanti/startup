@@ -132,8 +132,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - Tasks and notes are stored in MongoDB collections and accessed through backend API routes. All data is persisted and retrieved per user using a userId field, ensuring data is not stored in memory.
+- [x] **Stores credentials in MongoDB** - User accounts are stored in MongoDB with securely hashed passwords using bcrypt. Authentication is handled through login endpoints that validate credentials against stored hashes.
 
 ## 🚀 WebSocket deliverable
 
