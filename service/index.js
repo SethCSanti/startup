@@ -14,14 +14,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-let sessions = {};
-
 // Serve frontend files
 app.use(express.static('public'));
 
-function getUserIdFromRequest(req) {
+async function getUserIdFromRequest(req) {
   const token = req.cookies.authToken;
-  return token && sessions[token];
+  if (!token) return null;
+
+  const session = await db.getSession(token);
+  return session ? session.userId : null;
 }
 
 
@@ -66,7 +67,7 @@ app.post('/api/auth/login', async (req, res) => {
 
   if (user && await bcrypt.compare(req.body.password, user.password)) {
     const token = uuidv4();
-    sessions[token] = user.id;
+    await db.addSession(token, user.id);
 
     res.cookie('authToken', token, { httpOnly: true });
     res.send({ id: user.id });
@@ -76,18 +77,22 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // Logout
-app.post('/api/auth/logout', (req, res) => {
+app.post('/api/auth/logout', async (req, res) => {
   const token = req.cookies.authToken;
-  delete sessions[token];
+  if (token) {
+    await db.deleteSession(token);
+  }
   res.clearCookie('authToken');
   res.send({});
 });
 
 // Restricted
-app.get('/api/restricted', (req, res) => {
+app.get('/api/restricted', async (req, res) => {
   const token = req.cookies.authToken;
 
-  if (!token || !sessions[token]) {
+  const session = await db.getSession(token);
+
+  if (!session) {
     return res.status(401).send({ msg: "Unauthorized" });
   }
 
@@ -98,11 +103,14 @@ app.get('/api/restricted', (req, res) => {
 app.get('/api/auth/me', async (req, res) => {
   const token = req.cookies.authToken;
 
-  if (!token || !sessions[token]) {
+  if (!token) {
     return res.send({ user: null });
   }
 
-  const userId = sessions[token];
+  const session = await db.getSession(token);
+  if (!session) return res.send({ user: null });
+
+  const userId = session.userId;
   const user = await db.getUserById(userId);
 
   if (!user) {
@@ -114,7 +122,7 @@ app.get('/api/auth/me', async (req, res) => {
 
 // Tasks
 app.get('/api/tasks', async (req, res) => {
-  const userId = getUserIdFromRequest(req);
+  const userId = await getUserIdFromRequest(req);
 
   if (!userId) {
     return res.status(401).send({ msg: "Unauthorized" });
@@ -141,7 +149,7 @@ app.get('/api/tasks', async (req, res) => {
 });
 
 app.post('/api/tasks', async (req, res) => {
-  const userId = getUserIdFromRequest(req);
+  const userId = await getUserIdFromRequest(req);
 
   if (!userId) {
     return res.status(401).send({ msg: "Unauthorized" });
@@ -162,7 +170,7 @@ app.post('/api/tasks', async (req, res) => {
 });
 
 app.delete('/api/tasks/:id', async (req, res) => {
-  const userId = getUserIdFromRequest(req);
+  const userId = await getUserIdFromRequest(req);
 
   await db.deleteTask(req.params.id, userId);
   res.send({});
@@ -171,7 +179,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
 
 // Notes
 app.get('/api/notes', async (req, res) => {
-  const userId = getUserIdFromRequest(req);
+  const userId = await getUserIdFromRequest(req);
 
   if (!userId) {
     return res.status(401).send({ msg: "Unauthorized" });
@@ -204,7 +212,7 @@ Start by creating your first note!`
 });
 
 app.post('/api/notes', async (req, res) => {
-  const userId = getUserIdFromRequest(req);
+  const userId = await getUserIdFromRequest(req);
 
   if (!userId) {
     return res.status(401).send({ msg: "Unauthorized" });
@@ -224,7 +232,7 @@ app.post('/api/notes', async (req, res) => {
 });
 
 app.delete('/api/notes/:id', async (req, res) => {
-  const userId = getUserIdFromRequest(req);
+  const userId = await getUserIdFromRequest(req);
 
   await db.deleteNote(req.params.id, userId);
   res.send({});

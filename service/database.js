@@ -9,6 +9,7 @@ const db = client.db('loadmap');
 const taskCollection = db.collection('tasks');
 const noteCollection = db.collection('notes');
 const userCollection = db.collection('users');
+const sessionCollection = db.collection('sessions');
 
 // Test connection
 (async function testConnection() {
@@ -60,6 +61,23 @@ function getUserById(id) {
   return userCollection.findOne({ id: id });
 }
 
+// Session functions
+function addSession(token, userId) {
+  return sessionCollection.insertOne({
+    token,
+    userId,
+    createdAt: new Date()
+  });
+}
+
+function getSession(token) {
+  return sessionCollection.findOne({ token });
+}
+
+function deleteSession(token) {
+  return sessionCollection.deleteOne({ token });
+}
+
 module.exports = {
   getTasks,
   addTask,
@@ -69,5 +87,8 @@ module.exports = {
   deleteNote,
   getUser,
   getUserById,
-  addUser
+  addUser,
+  addSession,
+  getSession,
+  deleteSession
 };
