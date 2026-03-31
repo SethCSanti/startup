@@ -5,7 +5,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const db = require('./database.js');
-const { WebSocketServer } = require('ws');
+const { WebSocketServer, WebSocket } = require('ws');
 
 const app = express();
 
@@ -24,6 +24,18 @@ async function getUserIdFromRequest(req) {
 
   const session = await db.getSession(token);
   return session ? session.userId : null;
+}
+
+// Store connected clients
+const clients = new Set();
+
+function broadcast(message) {
+  const data = JSON.stringify(message);
+  clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data);
+    }
+  });
 }
 
 
@@ -165,8 +177,12 @@ app.post('/api/tasks', async (req, res) => {
     category: req.body.category,
     clicks: 0
   };
-
   await db.addTask(task);
+
+  broadcast({
+    type: 'task-added',
+    task
+  });
   res.send(task);
 });
 
@@ -174,9 +190,13 @@ app.delete('/api/tasks/:id', async (req, res) => {
   const userId = await getUserIdFromRequest(req);
 
   await db.deleteTask(req.params.id, userId);
+
+  broadcast({
+    type: 'task-deleted',
+    id: req.params.id
+  });
   res.send({});
 });
-
 
 // Notes
 app.get('/api/notes', async (req, res) => {
@@ -229,6 +249,11 @@ app.post('/api/notes', async (req, res) => {
   };
 
   await db.addNote(note);
+
+  broadcast({
+    type: 'note-added',
+    note
+  });
   res.send(note);
 });
 
@@ -236,10 +261,15 @@ app.delete('/api/notes/:id', async (req, res) => {
   const userId = await getUserIdFromRequest(req);
 
   await db.deleteNote(req.params.id, userId);
+
+  broadcast({
+    type: 'note-deleted',
+    id: req.params.id
+  });
   res.send({});
 });
 
-// React router fallback (MUST BE LAST)
+// React router fallback
 app.use((req, res) => {
   res.sendFile(path.resolve('public/index.html'));
 });
@@ -250,9 +280,6 @@ const server = app.listen(port, () => {
 
 // WebSocket server
 const wss = new WebSocketServer({ server });
-
-// Store connected clients
-const clients = new Set();
 
 wss.on('connection', (ws) => {
   console.log('WebSocket connected');
