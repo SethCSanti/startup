@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connectWebSocket } from "../websocket";
 import "../app.css";
 
 export function Tasks() {
@@ -25,6 +26,20 @@ export function Tasks() {
 
     loadTasks();
   }, []);
+
+  useEffect(() => {
+  connectWebSocket((msg) => {
+    if (msg.type === "task-added") {
+      setTasks((prev) => [...prev, msg.task]);
+    }
+
+    if (msg.type === "task-deleted") {
+      setTasks((prev) =>
+        prev.filter((t) => t.id !== msg.id)
+      );
+    }
+  });
+}, []);
 
   // DETERMINE CURRENT SIZE BASED ON CLICKS
   const getDynamicWeight = (task) => {
