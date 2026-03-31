@@ -5,6 +5,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const db = require('./database.js');
+const { WebSocketServer } = require('ws');
 
 const app = express();
 
@@ -243,6 +244,21 @@ app.use((req, res) => {
   res.sendFile(path.resolve('public/index.html'));
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server running on port ${port}`);
+});
+
+// WebSocket server
+const wss = new WebSocketServer({ server });
+
+// Store connected clients
+const clients = new Set();
+
+wss.on('connection', (ws) => {
+  console.log('WebSocket connected');
+  clients.add(ws);
+
+  ws.on('close', () => {
+    clients.delete(ws);
+  });
 });

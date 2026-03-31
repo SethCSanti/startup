@@ -8,7 +8,8 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.4",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^7.13.0",
+    "ws": "^8.20.0"
   },
   "name": "cs260",
   "version": "1.0.0",
