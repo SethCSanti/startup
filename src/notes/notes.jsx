@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connectWebSocket } from "../websocket";
 import "../app.css";
 
 export function Notes() {
@@ -9,6 +10,20 @@ export function Notes() {
   const [filter, setFilter] = useState("All");
   const [activeNoteId, setActiveNoteId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+  connectWebSocket((msg) => {
+    if (msg.type === "note-added") {
+      setNotes((prev) => [...prev, msg.note]);
+    }
+
+    if (msg.type === "note-deleted") {
+      setNotes((prev) =>
+        prev.filter((n) => n.id !== msg.id)
+      );
+    }
+  });
+}, []);
 
   // Load notes from backend
  useEffect(() => {
