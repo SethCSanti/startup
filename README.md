@@ -139,8 +139,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I plan to implement a WebSocket server on the backend using the `ws` library to accept client connections and manage active sessions.
-- [ ] **Frontend makes WebSocket connection** - I will connect the frontend to the backend using a WebSocket client and maintain a persistent connection for receiving updates.
-- [ ] **Data sent over WebSocket connection** - I will send real-time updates from the backend whenever tasks or notes are created or deleted, broadcasting changes to all connected clients.
-- [ ] **WebSocket data displayed** - The frontend will listen for WebSocket messages and update the UI dynamically so tasks and notes appear instantly without refreshing.
-- [ ] **Application is fully functional** - The application will support real-time synchronization of tasks and notes across multiple browser sessions using WebSockets.
+- [x] **Backend listens for WebSocket connection** - Implemented using ws and attached to Express server.
+- [x] **Frontend makes WebSocket connection** - A shared WebSocket client connects on app load.
+- [x] **Data sent over WebSocket connection** - Backend broadcasts task and note updates.
+- [x] **WebSocket data displayed** - UI updates in real-time across browser sessions.
+- [x] **Application is fully functional** - Real-time sync works across tabs/devices.
